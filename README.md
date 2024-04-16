@@ -1,4 +1,6 @@
-This needs a board_config.h file in your project, here's how that looks
+Gamepad device drivers for TinyUSB, this is being used in several of my projects
+
+This needs a board_config.h file in the project, here's how that looks
 ```
 #ifndef BOARD_CONFIG_H_
 #define BOARD_CONFIG_H_
