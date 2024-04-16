@@ -42,6 +42,53 @@ void PSClassicDriver::process(uint8_t idx, Gamepad * gamepad, uint8_t * outBuffe
         psClassicReport.buttons = PSCLASSIC_MASK_RIGHT;
     }
 
+    if (gamepad->joysticks.lx >= PSCLASSIC_JOYSTICK_THRESHOLD || 
+        gamepad->joysticks.rx >= PSCLASSIC_JOYSTICK_THRESHOLD) // right
+    {
+        if (gamepad->joysticks.ly <= -PSCLASSIC_JOYSTICK_THRESHOLD * 2 || 
+            gamepad->joysticks.ry <= -PSCLASSIC_JOYSTICK_THRESHOLD * 2) // down
+        {
+            psClassicReport.buttons = PSCLASSIC_MASK_DOWN_RIGHT;
+        }
+        else if (gamepad->joysticks.ly >= PSCLASSIC_JOYSTICK_THRESHOLD * 2 ||
+                gamepad->joysticks.ry >= PSCLASSIC_JOYSTICK_THRESHOLD * 2) // up
+        {
+            psClassicReport.buttons = PSCLASSIC_MASK_UP_RIGHT;
+        }
+        else
+        {
+            psClassicReport.buttons = PSCLASSIC_MASK_RIGHT;
+        }
+    } 
+    else if (gamepad->joysticks.lx <= -PSCLASSIC_JOYSTICK_THRESHOLD ||
+            gamepad->joysticks.rx <= -PSCLASSIC_JOYSTICK_THRESHOLD) // left
+    {
+        if (gamepad->joysticks.ly <= -PSCLASSIC_JOYSTICK_THRESHOLD * 2 ||
+            gamepad->joysticks.ry <= -PSCLASSIC_JOYSTICK_THRESHOLD * 2) // down
+        {
+            psClassicReport.buttons = PSCLASSIC_MASK_DOWN_LEFT;
+        }
+        else if (gamepad->joysticks.ly >= PSCLASSIC_JOYSTICK_THRESHOLD * 2 ||
+                gamepad->joysticks.ry >= PSCLASSIC_JOYSTICK_THRESHOLD * 2) // up
+        {
+            psClassicReport.buttons = PSCLASSIC_MASK_UP_LEFT;
+        }
+        else
+        {
+            psClassicReport.buttons = PSCLASSIC_MASK_LEFT;
+        }
+    } 
+    else if (gamepad->joysticks.ly <= -PSCLASSIC_JOYSTICK_THRESHOLD ||
+            gamepad->joysticks.ry <= -PSCLASSIC_JOYSTICK_THRESHOLD) // down
+    {
+        psClassicReport.buttons = PSCLASSIC_MASK_DOWN;
+    } 
+    else if (gamepad->joysticks.ly >= PSCLASSIC_JOYSTICK_THRESHOLD ||
+            gamepad->joysticks.ry >= PSCLASSIC_JOYSTICK_THRESHOLD) // up
+    {
+        psClassicReport.buttons = PSCLASSIC_MASK_UP;
+    } 
+
     psClassicReport.buttons |=
         (gamepad->buttons.start ? PSCLASSIC_MASK_START    : 0) |
         (gamepad->buttons.back  ? PSCLASSIC_MASK_SELECT   : 0) |
