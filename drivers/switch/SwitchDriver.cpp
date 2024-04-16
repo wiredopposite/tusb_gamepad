@@ -1,7 +1,7 @@
 #include "usbd/drivers/switch/SwitchDriver.h"
 #include "usbd/drivers/shared/driverhelper.h"
 
-#include "utilities/scaling.h"
+#include "usbd/drivers/shared/scaling.h"
 
 void SwitchDriver::initialize() {
 	switchReport = {

@@ -1,9 +1,8 @@
-#include "utilities/scaling.h"
-
 #include "usbd/drivers/dinput/DInputDriver.h"
 #include "usbd/descriptors/DInputDescriptors.h"
 
 #include "usbd/drivers/shared/driverhelper.h"
+#include "usbd/drivers/shared/scaling.h"
 
 // Magic byte sequence to enable PS button on PS3
 static const uint8_t ps3_magic_init_bytes[8] = {0x21, 0x26, 0x01, 0x07, 0x00, 0x00, 0x00, 0x00};
@@ -124,17 +123,7 @@ void DInputDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer)
         {
 			memcpy(last_report, report, report_size);
 		}
-		// if (tud_hid_n_ready(1) && tud_hid_n_report(1, 0, report, report_size) == true ) {
-		// 	// memcpy(last_report, report, report_size);
-		// }
-		// if (tud_hid_n_ready(2) && tud_hid_n_report(2, 0, report, report_size) == true ) {
-		// 	// memcpy(last_report, report, report_size);
-		// }
-		// if (tud_hid_n_ready(3) && tud_hid_n_report(3, 0, report, report_size) == true ) {
-		// 	// memcpy(last_report, report, report_size);
-		// }
-		// }
-	// }
+    // }
 }
 
 // tud_hid_get_report_cb

@@ -1,7 +1,8 @@
-#include "utilities/scaling.h"
 #include "usbd/drivers/ps3/PS3Driver.h"
 #include "usbd/descriptors/PS3Descriptors.h"
+
 #include "usbd/drivers/shared/driverhelper.h"
+#include "usbd/drivers/shared/scaling.h"
 
 static const uint8_t ps3_ps_btn_en_bytes[8] = 
 {

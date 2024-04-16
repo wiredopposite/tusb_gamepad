@@ -2,10 +2,10 @@
  * SPDX-License-Identifier: MIT
  * SPDX-FileCopyrightText: Copyright (c) 2024 OpenStickCommunity (gp2040-ce.info)
  */
-#include "utilities/scaling.h"
+#include "usbd/drivers/shared/scaling.h"
+#include "usbd/drivers/shared/driverhelper.h"
 
 #include "usbd/drivers/hid/HIDDriver.h"
-#include "usbd/drivers/shared/driverhelper.h"
 #include "usbd/descriptors/HIDDescriptors.h"
 
 // Magic byte sequence to enable PS button on PS3
