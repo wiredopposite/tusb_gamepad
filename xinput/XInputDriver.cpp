@@ -131,7 +131,7 @@ void XInputDriver::initialize()
 	};
 }
 
-void XInputDriver::process(uint8_t idx, Gamepad * gamepad, uint8_t * outBuffer) 
+void XInputDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer) 
 {
 	xinputReport.buttons1 = 0
 		| (gamepad->buttons.up    ? XBOX_MASK_UP    : 0)
@@ -229,12 +229,7 @@ const uint8_t * XInputDriver::get_descriptor_device_qualifier_cb()
 	return nullptr;
 }
 
-uint16_t XInputDriver::GetJoystickMidValue() 
-{
-	return 0;
-}
-
-void XInputDriver::update_rumble(uint8_t idx, Gamepad * gamepad)
+void XInputDriver::update_rumble(int idx, Gamepad * gamepad)
 {
 	gamepad->rumble.l = xinput_rumble.left_motor;
 	gamepad->rumble.r = xinput_rumble.right_motor; 

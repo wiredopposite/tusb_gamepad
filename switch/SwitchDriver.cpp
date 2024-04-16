@@ -27,7 +27,7 @@ void SwitchDriver::initialize() {
 	};
 }
 
-void SwitchDriver::process(uint8_t idx, Gamepad * gamepad, uint8_t * outBuffer) 
+void SwitchDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer) 
 {
 	switchReport.hat = SWITCH_HAT_NOTHING;
 
@@ -92,11 +92,6 @@ void SwitchDriver::process(uint8_t idx, Gamepad * gamepad, uint8_t * outBuffer)
 	switchReport.rx = scale_int16_to_uint8(gamepad->joysticks.rx, false);
 	switchReport.ry = scale_int16_to_uint8(gamepad->joysticks.ry, true);
 
-	// switchReport.lx = static_cast<uint8_t>((gamepad->state.lx + 32768) >> 8);
-	// switchReport.ly = static_cast<uint8_t>(((-gamepad->state.ly - 1) + 32768) >> 8);
-	// switchReport.rx = static_cast<uint8_t>((gamepad->state.rx + 32768) >> 8);
-	// switchReport.ry = static_cast<uint8_t>(((-gamepad->state.ry - 1) + 32768) >> 8);
-
 	// Wake up TinyUSB device
 	if (tud_suspended())
 		tud_remote_wakeup();
@@ -148,11 +143,7 @@ const uint8_t * SwitchDriver::get_descriptor_device_qualifier_cb() {
 	return nullptr;
 }
 
-uint16_t SwitchDriver::GetJoystickMidValue() {
-	return SWITCH_JOYSTICK_MID << 8;
-}
-
-void SwitchDriver::update_rumble(uint8_t idx, Gamepad * gamepad)
+void SwitchDriver::update_rumble(int idx, Gamepad * gamepad)
 {
     
 }

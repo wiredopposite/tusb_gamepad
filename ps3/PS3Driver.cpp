@@ -91,7 +91,7 @@ void PS3Driver::initialize()
 	};
 }
 
-void PS3Driver::process(uint8_t idx, Gamepad * gamepad, uint8_t * outBuffer) 
+void PS3Driver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer) 
 {
     // if (!ps3_auth) return;
 
@@ -214,12 +214,7 @@ const uint8_t * PS3Driver::get_descriptor_device_qualifier_cb()
 	return nullptr;
 }
 
-uint16_t PS3Driver::GetJoystickMidValue() 
-{
-	return PS3_JOYSTICK_MID;
-}
-
-void PS3Driver::update_rumble(uint8_t idx, Gamepad * gamepad)
+void PS3Driver::update_rumble(int idx, Gamepad * gamepad)
 {
     gamepad->rumble.l = ds3_out_report.rumble.left_motor_force;
     gamepad->rumble.r = (ds3_out_report.rumble.right_motor_on < 0) ? 0xFF: 0x00;

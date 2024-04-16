@@ -52,7 +52,7 @@ void HIDDriver::initialize()
 }
 
 // Generate HID report from gamepad and send to TUSB Device
-void HIDDriver::process(uint8_t idx, Gamepad * gamepad, uint8_t * outBuffer) 
+void HIDDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer) 
 {
    if (gamepad->buttons.up) {
         if (gamepad->buttons.right) {
@@ -117,7 +117,7 @@ void HIDDriver::process(uint8_t idx, Gamepad * gamepad, uint8_t * outBuffer)
 	if (memcmp(last_report, report, report_size) != 0)
 	{
 		// HID ready + report sent, copy previous report
-		if (tud_hid_n_ready(idx) && tud_hid_n_report(idx, 0, report, report_size) == true ) 
+		if (tud_hid_n_ready((uint8_t)idx) && tud_hid_n_report((uint8_t)idx, 0, report, report_size) == true ) 
         {
 			memcpy(last_report, report, report_size);
 		}
@@ -166,12 +166,7 @@ const uint8_t * HIDDriver::get_descriptor_device_qualifier_cb()
 	return nullptr;
 }
 
-uint16_t HIDDriver::GetJoystickMidValue() 
-{
-	return HID_JOYSTICK_MID << 8;
-}
-
-void HIDDriver::update_rumble(uint8_t idx, Gamepad * gamepad)
+void HIDDriver::update_rumble(int idx, Gamepad * gamepad)
 {
     
 }

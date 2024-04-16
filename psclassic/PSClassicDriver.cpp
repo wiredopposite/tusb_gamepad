@@ -19,7 +19,7 @@ void PSClassicDriver::initialize() {
 	};
 }
 
-void PSClassicDriver::process(uint8_t idx, Gamepad * gamepad, uint8_t * outBuffer) {
+void PSClassicDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer) {
     psClassicReport.buttons = PSCLASSIC_MASK_CENTER;
 
     if (gamepad->buttons.up) {
@@ -151,11 +151,7 @@ const uint8_t * PSClassicDriver::get_descriptor_device_qualifier_cb() {
 	return nullptr;
 }
 
-uint16_t PSClassicDriver::GetJoystickMidValue() {
-	return 0;
-}
-
-void PSClassicDriver::update_rumble(uint8_t idx, Gamepad * gamepad)
+void PSClassicDriver::update_rumble(int idx, Gamepad * gamepad)
 {
     
 }

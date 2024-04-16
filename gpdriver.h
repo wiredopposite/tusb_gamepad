@@ -22,7 +22,7 @@ class Gamepad;
 class GPDriver {
 public:
     virtual void initialize() = 0;
-    virtual void process(uint8_t idx, Gamepad * gamepad, uint8_t * outBuffer) = 0;
+    virtual void process(int idx, Gamepad * gamepad, uint8_t * outBuffer) = 0;
     virtual uint16_t get_report(uint8_t report_id, hid_report_type_t report_type, uint8_t *buffer, uint16_t reqlen) = 0;
     virtual void set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) = 0;
     virtual bool vendor_control_xfer_cb(uint8_t rhport, uint8_t stage, tusb_control_request_t const *request) = 0;
@@ -31,8 +31,7 @@ public:
     virtual const uint8_t * get_hid_descriptor_report_cb(uint8_t itf) = 0;
     virtual const uint8_t * get_descriptor_configuration_cb(uint8_t index) = 0;
     virtual const uint8_t * get_descriptor_device_qualifier_cb() = 0;
-    virtual uint16_t GetJoystickMidValue() = 0;
-    virtual void update_rumble(uint8_t idx, Gamepad * gamepad) = 0;
+    virtual void update_rumble(int idx, Gamepad * gamepad) = 0;
     const usbd_class_driver_t * get_class_driver() { return &class_driver; }
 protected:
     usbd_class_driver_t class_driver;

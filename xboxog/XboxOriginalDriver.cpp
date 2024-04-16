@@ -33,7 +33,7 @@ void XboxOriginalDriver::initialize() {
     memcpy(&class_driver, xid_get_driver(), sizeof(usbd_class_driver_t));
 }
 
-void XboxOriginalDriver::process(uint8_t idx, Gamepad * gamepad, uint8_t * outBuffer) {
+void XboxOriginalDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer) {
 	// digital buttons
 	xboxOriginalReport.dButtons = 0
 		| (gamepad->buttons.up    ? XID_DUP    : 0)
@@ -118,11 +118,7 @@ const uint8_t * XboxOriginalDriver::get_descriptor_device_qualifier_cb() {
 	return nullptr;
 }
 
-uint16_t XboxOriginalDriver::GetJoystickMidValue() {
-	return 0;
-}
-
-void XboxOriginalDriver::update_rumble(uint8_t idx, Gamepad * gamepad)
+void XboxOriginalDriver::update_rumble(int idx, Gamepad * gamepad)
 {
     gamepad->rumble.l = xid_rumble.left_motor >> 8;
     gamepad->rumble.r = xid_rumble.right_motor >> 8;

@@ -26,7 +26,7 @@ void USBSerialDriver::initialize()
 	};
 }
 
-void USBSerialDriver::process(uint8_t idx, Gamepad * gamepad, uint8_t * outbuffer)
+void USBSerialDriver::process(int idx, Gamepad * gamepad, uint8_t * outbuffer)
 {
     uint32_t bytes_written = tud_cdc_write_str(get_log());
 
@@ -114,12 +114,7 @@ const uint8_t * USBSerialDriver::get_descriptor_device_qualifier_cb()
 	return nullptr;
 }
 
-uint16_t USBSerialDriver::GetJoystickMidValue() 
-{
-	return 0;
-}
-
-void USBSerialDriver::update_rumble(uint8_t idx, Gamepad * gamepad)
+void USBSerialDriver::update_rumble(int idx, Gamepad * gamepad)
 {
     
 }
