@@ -4,7 +4,7 @@
  * Copyright 2021 Álvaro Fernández Rojas <noltari@gmail.com>
  */
 
-#include "board_config.h"
+#include "usbd/board_config.h"
 #if (OGX_TYPE == WIRELESS) && (OGX_MCU == MCU_RP2040)
 
 #include <hardware/irq.h>

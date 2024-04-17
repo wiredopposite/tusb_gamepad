@@ -1,6 +1,6 @@
 #pragma once
 
-#include "board_config.h"
+#include "usbd/board_config.h"
 #if (OGX_TYPE == WIRELESS) && (OGX_MCU == MCU_RP2040)
 
 #include <stdint.h>

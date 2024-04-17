@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 #include "tusb.h"
-#include "board_config.h"
+#include "usbd/board_config.h"
 
 #define HID_ENDPOINT_SIZE 64
 
