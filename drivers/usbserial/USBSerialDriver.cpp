@@ -6,7 +6,7 @@
 #include "device/usbd_pvt.h"
 #include "class/cdc/cdc_device.h"
 
-#include "utilities/log.h"
+#include "usbd/utilities/log.h"
 
 #include "usbd/drivers/usbserial/USBSerialDriver.h"
 #include "usbd/descriptors/USBSerialDescriptors.h"

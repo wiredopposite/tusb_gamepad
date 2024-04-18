@@ -16,8 +16,8 @@ This needs a usbd_config.h file in the project defining the board you're using a
 // OGXW_RPZERO_2CH
 // OGXW_LITE
 
-#define USBD_BOARD        OGXM_ADA_FEATHER_USBH
-#define USBD_MAX_GAMEPADS 1 // This is set by idf.py menuconfig for wireless boards, number here is ignored in that case.
+#define USBD_BOARD        OGXW_RETAIL_1CH
+#define USBD_MAX_GAMEPADS 1 // This is set by idf.py menuconfig for the ESP32S3, number here is ignored in that case.
 #define CDC_DEBUG         0 // Set to 1 for CDC device, helpful for debugging USB host. Include utilities/log.h and use log() as you would printf()
 
 #endif // USBD_CONFIG_H_

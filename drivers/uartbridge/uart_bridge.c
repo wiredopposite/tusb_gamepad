@@ -4,20 +4,20 @@
  * Copyright 2021 Álvaro Fernández Rojas <noltari@gmail.com>
  */
 
-#include "usbd/board_config.h"
+
 #if (OGX_TYPE == WIRELESS) && (OGX_MCU == MCU_RP2040)
 
 #include <hardware/irq.h>
 #include <hardware/structs/sio.h>
 #include <hardware/uart.h>
+#include <hardware/flash.h>
 #include <pico/multicore.h>
 #include <pico/stdlib.h>
 #include <string.h>
 #include <tusb.h>
 
-#include <hardware/flash.h>
-
-#include "usbd/drivers/uartbridge/uart_bridge_task.h"
+#include "usbd/board_config.h"
+#include "usbd/drivers/uartbridge/uart_bridge.h"
 #include "usbd/descriptors/UARTBridgeDescriptors.h"
 
 #if !defined(MIN)

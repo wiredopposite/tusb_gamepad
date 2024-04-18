@@ -1,7 +1,7 @@
-#ifndef _UART_BRIDGE_TASK_H_
-#define _UART_BRIDGE_TASK_H_
+#ifndef _UART_BRIDGE_H_
+#define _UART_BRIDGE_H_
 
-#include "usbd/drivers/uartbridge/helpers.h"
+#if (OGX_TYPE == WIRELESS) && (OGX_MCU == MCU_RP2040)
 
 #ifdef __cplusplus
 extern "C" {
@@ -19,4 +19,6 @@ void core1_entry(void);
 }
 #endif
 
-#endif // _UART_BRIDGE_TASK_H_
+#endif // (OGX_TYPE == WIRELESS) && (OGX_MCU == MCU_RP2040)
+
+#endif // _UART_BRIDGE_H_
