@@ -16,7 +16,6 @@
 
 void DriverManager::setup(InputMode mode) 
 {
-    // driver = new DInputDriver();
     switch (mode) 
     {
         case INPUT_MODE_HID:
