@@ -1,5 +1,9 @@
 #include "usbd/drivers/xboxog/xid/xid.h"
 
+#ifndef TUD_OPT_RHPORT 
+#define TUD_OPT_RHPORT BOARD_TUD_RHPORT
+#endif
+
 bool duke_control_xfer(uint8_t rhport, uint8_t stage, tusb_control_request_t const *request, xid_interface_t *p_xid);
 bool steelbattalion_control_xfer(uint8_t rhport, uint8_t stage, tusb_control_request_t const *request, xid_interface_t *p_xid);
 bool xremote_control_xfer(uint8_t rhport, uint8_t stage, tusb_control_request_t const *request, xid_interface_t *p_xid);

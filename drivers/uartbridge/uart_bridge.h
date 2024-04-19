@@ -1,7 +1,7 @@
+#if (OGX_TYPE == WIRELESS) && (OGX_MCU == MCU_RP2040) && (CDC_DEVICES > 0)
+
 #ifndef _UART_BRIDGE_H_
 #define _UART_BRIDGE_H_
-
-#if (OGX_TYPE == WIRELESS) && (OGX_MCU == MCU_RP2040)
 
 #ifdef __cplusplus
 extern "C" {
@@ -19,6 +19,5 @@ void core1_entry(void);
 }
 #endif
 
-#endif // (OGX_TYPE == WIRELESS) && (OGX_MCU == MCU_RP2040)
-
 #endif // _UART_BRIDGE_H_
+#endif // (OGX_TYPE == WIRELESS) && (OGX_MCU == MCU_RP2040) && (CDC_DEVICES > 0)

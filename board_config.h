@@ -52,8 +52,12 @@
     #endif
 
 #elif OGX_TYPE == WIRELESS
-    #ifdef CONFIG_BLUEPAD32_MAX_DEVICES
-        #define MAX_GAMEPADS CONFIG_BLUEPAD32_MAX_DEVICES
+    #if OGX_MCU == MCU_ESP32S3
+        #include "sdkconfig.h"
+
+        #ifdef CONFIG_BLUEPAD32_MAX_DEVICES
+            #define MAX_GAMEPADS CONFIG_BLUEPAD32_MAX_DEVICES
+        #endif
     #else
         #ifdef USBD_MAX_GAMEPADS
             #define MAX_GAMEPADS USBD_MAX_GAMEPADS
@@ -105,7 +109,15 @@
 #endif
 
 #ifndef CDC_DEBUG
-    #define CDC_DEBUG 0
+    #define CDC_DEVICES 0
+#elif (CDC_DEBUG > 0)
+    #define CDC_DEVICES 1
+#else
+    #define CDC_DEVICES 0
+#endif
+
+#ifndef MIN
+    #define MIN(a,b) (((a) < (b)) ? (a) : (b))
 #endif
 
 #endif // BOARD_CONFIG_H_

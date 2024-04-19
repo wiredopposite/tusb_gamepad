@@ -1,5 +1,14 @@
-#include "stdint.h"
+#ifdef _USB_SERIAL_DRIVER_H_
 
+#if (OGX_MCU == MCU_ESP32S3)
+	#ifndef sleep_ms(x)
+		#include "freertos/FreeRTOS.h"
+		#include "freertos/task.h"
+		#define sleep_ms(x) vTaskDelay(pdMS_TO_TICKS(x))
+	#endif
+#endif
+
+#include "stdint.h"
 #include <string.h>
 
 #include <tusb.h>
@@ -7,6 +16,7 @@
 #include "class/cdc/cdc_device.h"
 
 #include "usbd/utilities/log.h"
+#include "usbd/board_config.h"
 
 #include "usbd/drivers/usbserial/USBSerialDriver.h"
 #include "usbd/descriptors/USBSerialDescriptors.h"
@@ -118,3 +128,5 @@ void USBSerialDriver::update_rumble(int idx, Gamepad * gamepad)
 {
     
 }
+
+#endif // _USB_SERIAL_DRIVER_H_

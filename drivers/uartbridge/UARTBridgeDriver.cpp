@@ -1,4 +1,4 @@
-#if (OGX_TYPE == WIRELESS) && (OGX_MCU == MCU_RP2040)
+#ifdef _UARTBRIDGEDRIVER_H_
 
 #include "stdint.h"
 #include <hardware/irq.h>
@@ -108,4 +108,4 @@ const uint8_t * UARTBridgeDriver::get_descriptor_device_qualifier_cb() {
 
 void UARTBridgeDriver::update_rumble(int idx, Gamepad * gamepad) {}
 
-#endif // (OGX_TYPE == WIRELESS) && (OGX_MCU == MCU_RP2040)
+#endif // _UARTBRIDGEDRIVER_H_

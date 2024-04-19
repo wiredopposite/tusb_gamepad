@@ -4,8 +4,7 @@
  * Copyright 2021 Álvaro Fernández Rojas <noltari@gmail.com>
  */
 
-
-#if (OGX_TYPE == WIRELESS) && (OGX_MCU == MCU_RP2040)
+#ifdef _UART_BRIDGE_H_
 
 #include <hardware/irq.h>
 #include <hardware/structs/sio.h>
@@ -312,4 +311,4 @@ void usbd_serial_init(void)
 		 id[0], id[1], id[2], id[3], id[4], id[5], id[6], id[7]);
 }
 
-#endif // (OGX_TYPE == WIRELESS) && (OGX_MCU == MCU_RP2040)
+#endif // _UART_BRIDGE_H_

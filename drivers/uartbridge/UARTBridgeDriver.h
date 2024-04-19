@@ -1,7 +1,7 @@
+#if (OGX_TYPE == WIRELESS) && (OGX_MCU == MCU_RP2040) && (CDC_DEVICES > 0)
+
 #ifndef _UARTBRIDGEDRIVER_H_
 #define _UARTBRIDGEDRIVER_H_
-
-#if (OGX_TYPE == WIRELESS) && (OGX_MCU == MCU_RP2040)
 
 #include "usbd/drivers/gpdriver.h"
 
@@ -22,6 +22,5 @@ class UARTBridgeDriver : public GPDriver
     private:
 };
 
-#endif // (OGX_TYPE == WIRELESS) && (OGX_MCU == MCU_RP2040)
-
 #endif // _UARTBRIDGEDRIVER_H_
+#endif // (OGX_TYPE == WIRELESS) && (OGX_MCU == MCU_RP2040) && (CDC_DEVICES > 0)

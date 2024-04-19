@@ -1,5 +1,7 @@
-#ifndef _UART_PASSTHROUGH_DRIVER_H_
-#define _UART_PASSTHROUGH_DRIVER_H_
+#if (CDC_DEVICES > 0)
+
+#ifndef _USB_SERIAL_DRIVER_H_
+#define _USB_SERIAL_DRIVER_H_
 
 #include "usbd/drivers/gpdriver.h"
 
@@ -19,4 +21,5 @@ public:
 private:
 };
 
-#endif
+#endif // _USB_SERIAL_DRIVER_H_
+#endif // (CDC_DEVICES > 0)
