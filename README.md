@@ -112,10 +112,11 @@ Freertos is a bit different with how TinyUSB is used, here's an example of a mai
 
 ### Interacting with the gamepad object
 To change the gamepad object's button, trigger, and joystick values or read rumble values:
+
+If you're only using one gamepad (MAX_GAMEPADS = 1), pass 0 as idx to gamepad(int idx):
 ```
 #include "tusb_gamepad.h"
 
-// If you're only using one gamepad (MAX_GAMEPADS = 1), pass 0 as idx to gamepad(int idx):
 void update_gamepad()
 {
     Gamepad* gp = gamepad(0);
@@ -124,16 +125,20 @@ void update_gamepad()
     gp->buttons.a    = true;  // buttons are bool
     gp->triggers.l   = 0xFF;  // triggers are uint8
     gp->joysticks.ly = 30000; // joysticks are int16
-
-    // or alternatively you can just use the gamepad function directly
+}
+```
+Or alternatively you can just use the gamepad function directly
+```
+void update_gamepad()
+{
     gamepad(0)->buttons.a    = true; 
     gamepad(0)->triggers.l   = 0xFF; 
     gamepad(0)->joysticks.ly = 30000;
 }
+```
 
-// if MAX_GAMEPADS is set to greater than 1, idx for
-// gamepad(int idx) should be between 0 and MAX_GAMEPADS-1
-// otherwise a null is returned
+If MAX_GAMEPADS is set to greater than 1, idx for gamepad(int idx) should be between 0 and MAX_GAMEPADS-1, otherwise a null is returned
+```
 void update_all_gamepads()
 {
     for (int i = 0; i < MAX_GAMEPADS; i++)
@@ -148,9 +153,10 @@ void update_all_gamepads()
         }
     }
 }
-
-// reading rumble values (uint8)
-// rumble is only supported with OG Xbox and XInput so they will always be zero otherwise
+```
+Reading rumble values (uint8):
+Rumble is only supported with OG Xbox and XInput so they will always be zero otherwise
+```
 void read_rumble_values()
 {
     Gamepad* gp = gamepad(0);
