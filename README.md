@@ -129,6 +129,8 @@ void update_gamepad()
 ```
 Or alternatively you can just use the gamepad function directly
 ```
+#include "tusb_gamepad.h"
+
 void update_gamepad()
 {
     gamepad(0)->buttons.a    = true; 
@@ -139,6 +141,8 @@ void update_gamepad()
 
 If MAX_GAMEPADS is set to greater than 1, idx for gamepad(int idx) should be between 0 and MAX_GAMEPADS-1, otherwise a null is returned
 ```
+#include "tusb_gamepad.h"
+
 void update_all_gamepads()
 {
     for (int i = 0; i < MAX_GAMEPADS; i++)
@@ -157,6 +161,8 @@ void update_all_gamepads()
 Reading rumble values (uint8):
 Rumble is only supported with OG Xbox and XInput so they will always be zero otherwise
 ```
+#include "tusb_gamepad.h"
+
 void read_rumble_values()
 {
     Gamepad* gp = gamepad(0);
