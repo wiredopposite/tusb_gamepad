@@ -40,19 +40,14 @@ You will need to add this line to your tusb_config.h file:
 ```
 #include "board_config.h"
 ```
-Similar to TinyUSB, this library needs a tusb_gamepad_config.h file in the project defining the MCU and the number of gamepads you're using.
+This library needs a tusb_gamepad_config.h file in the project defining some settings.
 Here's how the tusb_gamepad_config.h file will look:
 
 ```
 #ifndef TUSB_GAMEPAD_CONFIG_H_
 #define TUSB_GAMEPAD_CONFIG_H_
 
-// TUSB_GAMEPAD_MCU Options
-// MCU_RP2040 
-// MCU_ESPRESSIF_USB
-
 // TUSB_GAMEPAD Options
-#define TUSB_GAMEPAD_MCU   MCU_ESPRESSIF_USB
 #define MAX_GAMEPADS       1 // Max number of gamepads, this is used to add HID interfaces for PlayStation 3 and Switch, otherwise leave at 1.
 #define TUSB_CDC_DEBUG     0 // Set to 1 for CDC device, helpful for print debugging USB host. Include utilities/log.h and use log() as you would printf().
 

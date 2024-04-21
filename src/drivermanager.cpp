@@ -35,7 +35,7 @@ void DriverManager::setup(InputMode mode)
         case INPUT_MODE_USBSERIAL:
             driver = new USBSerialDriver();
             break;
-        #ifdef _UARTBRIDGEDRIVER_H_
+        #ifdef PICO_SDK_VERSION_STRING
         case INPUT_MODE_UART_BRIDGE:
             driver = new UARTBridgeDriver();
             break;

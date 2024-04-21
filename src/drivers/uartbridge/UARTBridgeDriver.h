@@ -1,4 +1,4 @@
-#if TUSB_GAMEPAD_MCU == MCU_RP2040
+#ifdef PICO_SDK_VERSION_STRING
 
 #ifndef _UARTBRIDGEDRIVER_H_
 #define _UARTBRIDGEDRIVER_H_
@@ -24,4 +24,4 @@ class UARTBridgeDriver : public GPDriver
 
 #endif // _UARTBRIDGEDRIVER_H_
 
-#endif // TUSB_GAMEPAD_MCU == MCU_RP2040
+#endif // PICO_SDK_VERSION_STRING

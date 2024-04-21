@@ -1,4 +1,4 @@
-#if TUSB_GAMEPAD_MCU == MCU_ESPRESSIF_USB
+#ifdef ESP_PLATFORM
 	#ifndef sleep_ms(x)
 		#include "freertos/FreeRTOS.h"
 		#include "freertos/task.h"

@@ -2,18 +2,9 @@
 #define BOARD_CONFIG_H_
 
 #include "tusb_config.h"
-#include "tusb_option.h"
 #include "tusb_gamepad_config.h"
 
-#ifndef TUSB_GAMEPAD_MCU
-    #error TUD_GAMEPAD_MCU must be defined in tusb_gamepad_config.h
-#endif
-
-// MCU
-#define MCU_RP2040  1
-#define MCU_ESPRESSIF_USB 2
-
-#if (TUSB_GAMEPAD_MCU == MCU_RP2040)
+#ifdef PICO_SDK_VERSION_STRING
     #ifndef MAX_GAMEPADS
         #define MAX_GAMEPADS 1
     #endif
@@ -26,7 +17,7 @@
         #define UART0_RX_PIN 17
     #endif
 
-#elif (TUSB_GAMEPAD_MCU == MCU_ESPRESSIF_USB)
+#elif defined(ESP_PLATFORM)
     #include "sdkconfig.h"
 
     #ifdef CONFIG_BLUEPAD32_MAX_DEVICES
@@ -97,10 +88,12 @@
 #endif
 
 // RHPORT
-#if TUSB_GAMEPAD_MCU == MCU_RP2040
+#ifdef PICO_SDK_VERSION_STRING
     #define TUSB_GAMEPAD_RHPORT TUD_OPT_RHPORT
-#elif TUSB_GAMEPAD_MCU == MCU_ESPRESSIF_USB
+#elif defined(ESP_PLATFORM)
     #define TUSB_GAMEPAD_RHPORT BOARD_TUD_RHPORT
+#else
+    #error "Unsupported tusb_gamepad platform, Pico-SDK or ESP required"
 #endif
 
 #endif // BOARD_CONFIG_H_
