@@ -32,11 +32,9 @@ void DriverManager::setup(InputMode mode)
         case INPUT_MODE_XINPUT:
             driver = new XInputDriver();
             break;
-        #ifdef _USB_SERIAL_DRIVER_H_
         case INPUT_MODE_USBSERIAL:
             driver = new USBSerialDriver();
             break;
-        #endif
         #ifdef _UARTBRIDGEDRIVER_H_
         case INPUT_MODE_UART_BRIDGE:
             driver = new UARTBridgeDriver();

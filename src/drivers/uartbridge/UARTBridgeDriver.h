@@ -23,4 +23,5 @@ class UARTBridgeDriver : public GPDriver
 };
 
 #endif // _UARTBRIDGEDRIVER_H_
+
 #endif // TUSB_GAMEPAD_MCU == MCU_RP2040

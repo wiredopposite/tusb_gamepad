@@ -17,6 +17,8 @@ set(executables
     ${CMAKE_CURRENT_SOURCE_DIR}/src/drivers/xboxog/xid/xid_gamepad.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/drivers/xboxog/xid/xid_remote.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/drivers/xboxog/xid/xid_steelbattalion.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/drivers/usbserial/USBSerialDriver.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/utilities/log.cpp
 )
 
 if(IDF_TARGET)
@@ -28,7 +30,6 @@ if(IDF_TARGET)
 
 elseif(PICO_SDK_VERSION_STRING)
     list(APPEND executables
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/drivers/usbserial/USBSerialDriver.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/drivers/uartbridge/UARTBridgeDriver.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/drivers/uartbridge/uart_bridge.c
         ${CMAKE_CURRENT_SOURCE_DIR}/src/drivers/uartbridge/esp32_prog_task.cpp)

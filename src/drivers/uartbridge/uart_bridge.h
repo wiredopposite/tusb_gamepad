@@ -20,4 +20,5 @@ void core1_entry(void);
 #endif
 
 #endif // _UART_BRIDGE_H_
+
 #endif // _UARTBRIDGEDRIVER_H_

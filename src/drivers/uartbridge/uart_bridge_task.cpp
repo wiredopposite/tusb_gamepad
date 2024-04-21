@@ -9,7 +9,7 @@
 #include "drivers/gpdriver.h"
 #include "inputmodes.h"
 #include "drivers/uartbridge/uart_bridge.h"
-#include "drivers/uartbridge/esp32_prog_task.h"
+#include "drivers/uartbridge/uart_bridge_task.h"
 
 void esp32_reset() 
 {
@@ -31,7 +31,7 @@ void esp32_reset()
 	gpio_put(ESP_PROG_PIN, 1);
 }
 
-void esp32_programming_task()
+void uart_bridge_task()
 {
     set_sys_clock_khz(250000, false);
 

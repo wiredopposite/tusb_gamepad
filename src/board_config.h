@@ -11,7 +11,7 @@
 
 // MCU
 #define MCU_RP2040  1
-#define MCU_ESP32S3 2
+#define MCU_ESPRESSIF_USB 2
 
 #if (TUSB_GAMEPAD_MCU == MCU_RP2040)
     #ifndef MAX_GAMEPADS
@@ -26,7 +26,7 @@
         #define UART0_RX_PIN 17
     #endif
 
-#elif (TUSB_GAMEPAD_MCU == MCU_ESP32S3)
+#elif (TUSB_GAMEPAD_MCU == MCU_ESPRESSIF_USB)
     #include "sdkconfig.h"
 
     #ifdef CONFIG_BLUEPAD32_MAX_DEVICES
@@ -47,11 +47,22 @@
 
 #endif 
 
+// define min for ESP32
 #ifndef MIN
     #define MIN(a,b) (((a) < (b)) ? (a) : (b))
 #endif
 
 // TinyUSB config
+// HID
+#ifdef CFG_TUD_HID
+    #if CFG_TUD_HID != (MAX_GAMEPADS + 1)
+        #undef CFG_TUD_HID
+        #define CFG_TUD_HID (MAX_GAMEPADS + 1)
+    #endif
+#else
+    #define CFG_TUD_HID (MAX_GAMEPADS + 1)
+#endif
+
 #ifdef CFG_TUD_HID_EP_BUFSIZE
     #if (CFG_TUD_HID_EP_BUFSIZE < 64)
         #undef CFG_TUD_HID_EP_BUFSIZE
@@ -61,33 +72,34 @@
     #define CFG_TUD_HID_EP_BUFSIZE 64
 #endif
 
-#if TUSB_GAMEPAD_MCU == MCU_RP2040
-    #ifndef TUSB_CDC_DEBUG
-        #define CDC_DEVICES 0
-    #elif (TUSB_CDC_DEBUG > 0)
-        #define CDC_DEVICES 1
-    #else
-        #define CDC_DEVICES 0
-    #endif
-
-    #ifdef CFG_TUD_CDC
+// CDC
+#ifdef CFG_TUD_CDC
+    #if (CFG_TUD_CDC < 1)
         #undef CFG_TUD_CDC
-        #define CFG_TUD_CDC CDC_DEVICES
-    #else
-        #define CFG_TUD_CDC CDC_DEVICES
+        #define CFG_TUD_CDC 1
     #endif
-#endif
-
-#ifdef CFG_TUD_HID
-    #undef CFG_TUD_HID
-    #define CFG_TUD_HID (MAX_GAMEPADS + 1)
 #else
-    #define CFG_TUD_HID (MAX_GAMEPADS + 1)
+    #define CFG_TUD_CDC 1
 #endif
 
+#ifndef CFG_TUD_CDC_RX_BUFSIZE
+    #define CFG_TUD_CDC_RX_BUFSIZE 256
+#elif (CFG_TUD_CDC_RX_BUFSIZE < 256)
+    #undef CFG_TUD_CDC_RX_BUFSIZE
+    #define CFG_TUD_CDC_RX_BUFSIZE 256
+#endif
+
+#ifndef CFG_TUD_CDC_TX_BUFSIZE
+    #define CFG_TUD_CDC_TX_BUFSIZE 256
+#elif (CFG_TUD_CDC_TX_BUFSIZE < 256)
+    #undef CFG_TUD_CDC_TX_BUFSIZE
+    #define CFG_TUD_CDC_TX_BUFSIZE 256
+#endif
+
+// RHPORT
 #if TUSB_GAMEPAD_MCU == MCU_RP2040
     #define TUSB_GAMEPAD_RHPORT TUD_OPT_RHPORT
-#elif TUSB_GAMEPAD_MCU == MCU_ESP32S3
+#elif TUSB_GAMEPAD_MCU == MCU_ESPRESSIF_USB
     #define TUSB_GAMEPAD_RHPORT BOARD_TUD_RHPORT
 #endif
 

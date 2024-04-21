@@ -36,24 +36,32 @@ idf_component_register( SRCS "main.c"
                         REQUIRES boards tinyusb_src tusb_gamepad)
 ```
 ### Config file
-Similar to TinyUSB, this library needs a tusb_gamepad_config.h file in the project defining the MCU and the number of gamepads you're using, here's how that will look:
+You will need to add this line to your tusb_config.h file:
+```
+#include "board_config.h"
+```
+Similar to TinyUSB, this library needs a tusb_gamepad_config.h file in the project defining the MCU and the number of gamepads you're using.
+Here's how the tusb_gamepad_config.h file will look:
 
 ```
 #ifndef TUSB_GAMEPAD_CONFIG_H_
 #define TUSB_GAMEPAD_CONFIG_H_
 
-// TUSB_GAMEPAD_MCUs
+// TUSB_GAMEPAD_MCU Options
 // MCU_RP2040 
 // MCU_ESPRESSIF_USB
 
 // TUSB_GAMEPAD Options
 #define TUSB_GAMEPAD_MCU   MCU_ESPRESSIF_USB
-#define MAX_GAMEPADS       1 // Max number of gamepads, this is used to add HID interfaces for PlayStation 3, otherwise leave at 1.
-#define TUSB_CDC_DEBUG     0 // Only used for the RP2040. Set to 1 for CDC device, helpful for print debugging USB host. Include utilities/log.h and use log() as you would printf()
+#define MAX_GAMEPADS       1 // Max number of gamepads, this is used to add HID interfaces for PlayStation 3 and Switch, otherwise leave at 1.
+#define TUSB_CDC_DEBUG     0 // Set to 1 for CDC device, helpful for print debugging USB host. Include utilities/log.h and use log() as you would printf().
 
-// Only used for the RP2040 and currently only works with UART0 pins, set InputMode to INPUT_MODE_UART_BRIDGE to use the RP2040 as a UART bridge. This setting is ignored otherwise.
-// #define UART0_TX_PIN 16 
-// #define UART0_RX_PIN 17
+/*  Only used for the RP2040 and currently only works with UART0 pins, 
+    set InputMode to INPUT_MODE_UART_BRIDGE to use it as a UART bridge. 
+    Include drivers/uartbridge/uart_bridge_task.h and use uart_bridge_task().
+    The function doesn't return.*/
+#define UART0_TX_PIN 16
+#define UART0_RX_PIN 17
 
 #endif // TUSB_GAMEPAD_CONFIG_H_
 ```

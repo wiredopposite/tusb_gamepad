@@ -1,6 +1,4 @@
-#ifdef _USB_SERIAL_DRIVER_H_
-
-#if TUSB_GAMEPAD_MCU == MCU_ESP32S3
+#if TUSB_GAMEPAD_MCU == MCU_ESPRESSIF_USB
 	#ifndef sleep_ms(x)
 		#include "freertos/FreeRTOS.h"
 		#include "freertos/task.h"
@@ -54,8 +52,7 @@ uint16_t USBSerialDriver::get_report(uint8_t report_id, hid_report_type_t report
 	return sizeof(buffer);
 }
 
-void USBSerialDriver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) 
-{}
+void USBSerialDriver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) {}
 
 bool USBSerialDriver::vendor_control_xfer_cb(uint8_t rhport, uint8_t stage, tusb_control_request_t const *request) 
 {
@@ -106,7 +103,7 @@ const uint16_t * USBSerialDriver::get_descriptor_string_cb(uint8_t index, uint16
 
 const uint8_t * USBSerialDriver::get_descriptor_device_cb() 
 {
-    return (uint8_t const *) &usbserial_device_descriptor;;
+    return (uint8_t const *) &usbserial_device_descriptor;
 }
 
 const uint8_t * USBSerialDriver::get_hid_descriptor_report_cb(uint8_t itf) 
@@ -124,9 +121,4 @@ const uint8_t * USBSerialDriver::get_descriptor_device_qualifier_cb()
 	return nullptr;
 }
 
-void USBSerialDriver::update_rumble(int idx, Gamepad * gamepad)
-{
-    
-}
-
-#endif // _USB_SERIAL_DRIVER_H_
+void USBSerialDriver::update_rumble(int idx, Gamepad * gamepad) {}
