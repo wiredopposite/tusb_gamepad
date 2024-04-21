@@ -89,7 +89,7 @@
 #elif defined(ESP_PLATFORM)
     #define TUSB_GAMEPAD_RHPORT BOARD_TUD_RHPORT
 #else
-    #error "Unsupported tusb_gamepad platform, Pico-SDK or ESP required"
+    #error "Unsupported tusb_gamepad platform, Pico-SDK or ESP-IDF required"
 #endif
 
 #endif // _BOARD_CONFIG_H_

@@ -10,7 +10,7 @@
 
 // DriverManager& driverManager;
 
-void init_tusb_gamepad(InputMode mode)
+void init_tusb_gamepad(enum InputMode mode)
 {
     DriverManager& driverManager = DriverManager::getInstance();
     // driverManager = DriverManager::getInstance();

@@ -9,7 +9,9 @@ A library that can emulate gamepads for several platforms using TinyUSB. Current
 - Nintendo Switch
 
 ## Requirements
-You will need TinyUSB integrated into your project, tusb_gamepad implements all necessary TinyUSB callbacks for you. I'll go over how to do that with the ESP-IDF specifically since it was a pain to figure out at first. You'll want to clone this repository into the components folder of your project, then ```git clone --recursive https://github.com/hathach/tinyusb.git``` into your project (somewhere else like a lib folder is probably best).
+You will need TinyUSB integrated into your project, tusb_gamepad implements all necessary TinyUSB callbacks for you. I'll go over how to do that with the ESP-IDF specifically since it was a pain to figure out at first. You'll want to clone this repository into the components folder of your project, then 
+```git clone --recursive https://github.com/hathach/tinyusb.git``` 
+into your project (somewhere else like a lib folder is best).
 ### ESP-IDF
 Here's an example CMakeLists.txt file at the root of the project integrating TinyUSB:
 ```
@@ -41,7 +43,7 @@ You will need to add this line to your tusb_config.h file:
 #include "board_config.h"
 ```
 Optionally, you can create a tusb_gamepad_config.h file in your project to change some settings.
-Here's how the tusb_gamepad_config.h file will look:
+Here's how the file will look:
 
 ```
 #ifndef _TUSB_GAMEPAD_CONFIG_H_

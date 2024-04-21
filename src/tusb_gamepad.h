@@ -9,7 +9,7 @@ extern "C" {
 #include "Gamepad.h"
 #include "board_config.h"
 
-void init_tusb_gamepad(InputMode mode);
+void init_tusb_gamepad(enum InputMode mode);
 void tusb_gamepad_task();
 
 #ifdef __cplusplus
