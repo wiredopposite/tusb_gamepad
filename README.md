@@ -40,12 +40,12 @@ You will need to add this line to your tusb_config.h file:
 ```
 #include "board_config.h"
 ```
-This library needs a tusb_gamepad_config.h file in the project defining some settings.
+Optionally, you can create a tusb_gamepad_config.h file in your project to change some settings.
 Here's how the tusb_gamepad_config.h file will look:
 
 ```
-#ifndef TUSB_GAMEPAD_CONFIG_H_
-#define TUSB_GAMEPAD_CONFIG_H_
+#ifndef _TUSB_GAMEPAD_CONFIG_H_
+#define _TUSB_GAMEPAD_CONFIG_H_
 
 // TUSB_GAMEPAD Options
 #define MAX_GAMEPADS       1 // Max number of gamepads, this is used to add HID interfaces for PlayStation 3 and Switch, otherwise leave at 1.
@@ -58,9 +58,9 @@ Here's how the tusb_gamepad_config.h file will look:
 #define UART0_TX_PIN 16
 #define UART0_RX_PIN 17
 
-#endif // TUSB_GAMEPAD_CONFIG_H_
+#endif // _TUSB_GAMEPAD_CONFIG_H_
 ```
-The library will automatically redefine some things in your tusb_config.h file based on your choices here to make sure everything works properly with your settings.
+The library will automatically redefine some things in your tusb_config.h file to make sure everything works properly with tusb_gamepad.
 
 ## Usage
 This library is still in very eary development so usage is subject to change. 

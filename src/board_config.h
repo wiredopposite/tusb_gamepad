@@ -1,8 +1,11 @@
-#ifndef BOARD_CONFIG_H_
-#define BOARD_CONFIG_H_
+#ifndef _BOARD_CONFIG_H_
+#define _BOARD_CONFIG_H_
 
 #include "tusb_config.h"
-#include "tusb_gamepad_config.h"
+
+#ifdef _TUSB_GAMEPAD_CONFIG_H_
+    #include "tusb_gamepad_config.h"
+#endif
 
 #ifdef PICO_SDK_VERSION_STRING
     #ifndef MAX_GAMEPADS
@@ -27,13 +30,6 @@
         #ifndef MAX_GAMEPADS
             #define MAX_GAMEPADS 1
         #endif
-    #endif
-
-#else
-    #ifdef TUSB_MAX_GAMEPADS
-        #define MAX_GAMEPADS TUSB_MAX_GAMEPADS
-    #else
-        #define MAX_GAMEPADS 1
     #endif
 
 #endif 
@@ -96,4 +92,4 @@
     #error "Unsupported tusb_gamepad platform, Pico-SDK or ESP required"
 #endif
 
-#endif // BOARD_CONFIG_H_
+#endif // _BOARD_CONFIG_H_
