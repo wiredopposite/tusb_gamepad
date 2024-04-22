@@ -9,34 +9,8 @@ A library that can emulate gamepads for several platforms using TinyUSB. Current
 - Nintendo Switch
 
 ## Requirements
-You will need TinyUSB integrated into your project, tusb_gamepad implements all necessary TinyUSB callbacks for you. I'll go over how to do that with the ESP-IDF specifically since it was a pain to figure out at first. You'll want to clone this repository into the components folder of your project, then 
-```git clone --recursive https://github.com/hathach/tinyusb.git``` 
-into your project (somewhere else like a lib folder is best).
-### ESP-IDF
-Here's an example CMakeLists.txt file at the root of the project integrating TinyUSB:
-```
-cmake_minimum_required(VERSION 3.17)
-set(CMAKE_C_STANDARD 11)
-set(CMAKE_CXX_STANDARD 17)
+You will need TinyUSB added to your project, tusb_gamepad implements all necessary TinyUSB callbacks for you. 
 
-set(FAMILY espressif)
-set(BOARD espressif_s3_devkitc) // or whichever board you're using, the options are the folder names in tinyusb/hw/bsp/espressif/boards
-
-set(TINYUSB_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/lib/tinyusb) // or wherever you put tinyusb
-include(${TINYUSB_ROOT}/hw/bsp/family_support.cmake)
-
-family_get_project_name(PROJECT ${CMAKE_CURRENT_LIST_DIR})
-
-project(${PROJECT} C CXX ASM)
-
-family_initialize_project(${PROJECT} ${CMAKE_CURRENT_LIST_DIR})
-```
-Then in your "src" or "main" directory CMakeLists.txt file, you'll add boards, tinyusb_src, and tusb_gamepad to your list of requires
-```
-idf_component_register( SRCS "main.c" 
-                        INCLUDE_DIRS "."
-                        REQUIRES boards tinyusb_src tusb_gamepad)
-```
 ### Config file
 You will need to add this line to your tusb_config.h file:
 ```
@@ -64,6 +38,13 @@ Here's how the file will look:
 ```
 The library will automatically redefine some things in your tusb_config.h file to make sure everything works properly with tusb_gamepad.
 
+### Template/example projects
+
+I've made a couple of template projects to demonstrate integrating this library into your project. The ESP-IDF components system can be troublsome so hopefully this helps.
+
+- ESP-IDF: 
+- PICO-SDK: 
+
 ## Usage
 This library is still in very eary development so usage is subject to change. 
 
@@ -84,36 +65,6 @@ enum InputMode
 INPUT_MODE_USBSERIAL and INPUT_MODE_UART_BRIDGE are both for the RP2040 only and there incase you'd like to use it as a UART programmer (INPUT_MODE_UART_BRIDGE) or get debug print statements via USB (INPUT_MODE_USBSERIAL). 
 
 A more detailed explanation of these modes is at the bottom of this README.
-
-### With the RP2040
-Here's an example of how you'd structure your main function and loop to use this library on the Pico:
-
-```
-#include "bsp/board_api.h" // from tinyusb
-#include "tusb_gamepad.h"
-
-int main()
-{
-    board_init();
-
-    InputMode input_mode = INPUT_MODE_XINPUT;
-
-    init_tusb_gamepad(input_mode); // initializes the gamepad driver and tinyusb device stack
-
-    while(1)
-    {
-        tusb_gamepad_task(); // sends/receives USB reports, updates the gamepad object
-        tud_task();
-    }
-
-    return 0;
-}
-```
-
-### With the ESP32S3
-Freertos is a bit different with how TinyUSB is used, here's an example of a main.c file on the ESP32S3:
-
-
 
 ### Interacting with the gamepad object
 To change the gamepad object's button, trigger, and joystick values or read rumble values:
