@@ -1,4 +1,4 @@
-#if TUSB_GAMEPAD_MCU == MCU_ESP32S3
+#ifdef ESP_PLATFORM
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h" 
 #endif
@@ -8,7 +8,7 @@
 #include "drivers/gpdriver.h"
 #include "tusb_gamepad.h"
 
-// DriverManager& driverManager;
+Gamepad local_gamepad;
 
 void init_tusb_gamepad(enum InputMode mode)
 {
@@ -26,17 +26,18 @@ void tusb_gamepad_task()
     {
         if (gamepad(i)) 
         {
+            local_gamepad = *gamepad(i);
             uint8_t outBuffer[64];
-            driver->process(i, gamepad(i), outBuffer); // Dereference the pointer when passing to process
+            driver->process(i, &local_gamepad, outBuffer); // Dereference the pointer when passing to process
             driver->update_rumble(i, gamepad(i));       // Pass the pointer directly to update_rumble
         }
 
-        #if TUSB_GAMEPAD_MCU == MCU_ESP32S3
-        vTaskDelay(1);
+        #ifdef ESP_PLATFORM
+        vTaskDelay(4);
         #endif
     }
 
-    #if TUSB_GAMEPAD_MCU == MCU_ESP32S3
-    vTaskDelay(1);
+    #ifdef ESP_PLATFORM
+    vTaskDelay(4);
     #endif
 }

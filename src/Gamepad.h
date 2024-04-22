@@ -72,6 +72,9 @@ typedef struct
 typedef struct Gamepad Gamepad;
 
 typedef void (*GamepadResetPadFunc)(Gamepad*);
+typedef void (*GamepadResetButtonsFunc)(Gamepad*);
+typedef void (*GamepadResetTriggersFunc)(Gamepad*);
+typedef void (*GamepadResetJoysticksFunc)(Gamepad*);
 typedef void (*GamepadResetRumbleFunc)(Gamepad*);
 
 struct Gamepad 
@@ -82,10 +85,16 @@ struct Gamepad
     GamepadRumble 	 rumble;
 
     GamepadResetPadFunc reset_pad;
+	GamepadResetButtonsFunc reset_buttons;
+	GamepadResetTriggersFunc reset_triggers;
+	GamepadResetJoysticksFunc reset_joysticks;
     GamepadResetRumbleFunc reset_rumble;
 };
 
 void reset_pad(Gamepad *gamepad);
+void reset_buttons(Gamepad *gamepad);
+void reset_triggers(Gamepad *gamepad);
+void reset_joysticks(Gamepad *gamepad);
 void reset_rumble(Gamepad *gamepad);
 void initialize_gamepad(Gamepad *gamepad);
 Gamepad *gamepad(int idx);

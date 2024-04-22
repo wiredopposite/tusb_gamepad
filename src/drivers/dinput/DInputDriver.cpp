@@ -190,5 +190,5 @@ const uint8_t * DInputDriver::get_descriptor_device_qualifier_cb()
 
 void DInputDriver::update_rumble(int idx, Gamepad * gamepad)
 {
-    
+    return;
 }

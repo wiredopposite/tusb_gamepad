@@ -21,10 +21,10 @@
 
 void USBSerialDriver::initialize()
 {
-	#if CFG_TUSB_DEBUG >= 2
-		.name = "UART",
-	#endif
 	class_driver = {
+	#if CFG_TUSB_DEBUG >= 2
+		.name = "USBSERIAL",
+	#endif
 		.init = cdcd_init,
 		.reset = cdcd_reset,
 		.open = cdcd_open,

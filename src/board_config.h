@@ -3,6 +3,10 @@
 
 #include "tusb_config.h"
 
+#ifdef __cplusplus
+    extern "C" {
+#endif
+
 #ifdef _TUSB_GAMEPAD_CONFIG_H_
     #include "tusb_gamepad_config.h"
 #endif
@@ -90,6 +94,10 @@
     #define TUSB_GAMEPAD_RHPORT BOARD_TUD_RHPORT
 #else
     #error "Unsupported tusb_gamepad platform, Pico-SDK or ESP-IDF required"
+#endif
+
+#ifdef __cplusplus
+    }
 #endif
 
 #endif // _BOARD_CONFIG_H_
