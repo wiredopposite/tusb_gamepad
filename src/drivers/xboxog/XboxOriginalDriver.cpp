@@ -37,7 +37,7 @@ void XboxOriginalDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer
 		| (gamepad->buttons.r3    ? XID_RS     : 0)
 	;
 
-    if (gamepad->use_analog_buttons)
+    if (gamepad->enable_analog_buttons)
     {
         xboxog_report.A     = gamepad->analog_buttons.a ;
         xboxog_report.B     = gamepad->analog_buttons.b ;

@@ -12,34 +12,23 @@ A library that can emulate gamepads for several platforms using TinyUSB. Current
 You will need TinyUSB added to your project, tusb_gamepad implements all necessary TinyUSB callbacks for you. 
 
 ### Config file
-You will need to add this line to your tusb_config.h file:
+You will need to add these line to your tusb_config.h file:
 ```
 #include "board_config.h"
-```
-Optionally, you can create a tusb_gamepad_config.h file in your project to change some settings.
-Here's how the file will look:
 
+#define MAX_GAMEPADS 1 // or more if wanted for DInput/PlayStation 3
 ```
-#ifndef _TUSB_GAMEPAD_CONFIG_H_
-#define _TUSB_GAMEPAD_CONFIG_H_
-
-// TUSB_GAMEPAD Options
-#define MAX_GAMEPADS       1 // Max number of gamepads, this is used to add HID interfaces for PlayStation 3 and Switch, otherwise leave at 1.
-#define TUSB_CDC_DEBUG     0 // Set to 1 for CDC device, helpful for print debugging USB host. Include utilities/log.h and use log() as you would printf().
-
-#endif // _TUSB_GAMEPAD_CONFIG_H_
-```
-The library will automatically redefine some things in your tusb_config.h file to make sure everything works properly with tusb_gamepad.
+The library will automatically redefine some TinyUSB settings to make sure everything works properly with tusb_gamepad.
 
 ## Usage
 This library is still in very eary development so usage is subject to change. 
 
 ### Template/example projects
 
-I've made a couple of template projects to demonstrate integrating and using this library in your project. Integrating TinyUSB with ESP-IDF was troublesome for me at first so hopefully this helps.
+I've made a couple template projects to demonstrate integrating and using this library in your project. Integrating TinyUSB with ESP-IDF was troublesome for me at first so hopefully this helps. Take note of the CMakeLists.txt files in each.
 
 - ESP-IDF: https://github.com/wiredopposite/tusb_gamepad_example_esp-idf
-- PICO-SDK: 
+- PICO-SDK: https://github.com/wiredopposite/tusb_gamepad_example_pico-sdk
 
 ### Interacting with the gamepad object
 To change the gamepad object's button, trigger, and joystick values or read rumble values:
@@ -53,9 +42,14 @@ void update_gamepad()
     Gamepad* gp = gamepad(0);
 
     gp->reset_pad(gp);        // resets buttons, triggers, and joysticks
-    gp->buttons.a    = true;  // buttons are bool
-    gp->triggers.l   = 0xFF;  // triggers are uint8
-    gp->joysticks.ly = 30000; // joysticks are int16
+
+    // different way to enable buttons, which are a uint16_t button mask
+    gp->buttons.a   = 1;
+    gp->buttons    |= GP_BUTTON_B;
+    gp->buttons.x   = true;
+
+    gp->triggers.l   = 0xFF;  // triggers are uint8_t
+    gp->joysticks.ly = 30000; // joysticks are full range int16_t
 }
 ```
 Or alternatively you can just use the gamepad function directly
@@ -67,6 +61,21 @@ void update_gamepad()
     gamepad(0)->buttons.a    = true; 
     gamepad(0)->triggers.l   = 0xFF; 
     gamepad(0)->joysticks.ly = 30000;
+}
+```
+There is also built-in support for analog buttons (uint8) for DInput (PlayStation 3) and Original Xbox. To enable this functionality, you only need to do this once:
+```
+gamepad(0)->enable_analog_buttons = true;
+```
+The analog buttons will be enabled from that point onward, or until you set enable_analog_buttons to false.
+```
+#include "tusb_gamepad.h"
+
+void update_analog_buttons()
+{
+    gamepad(0)->analog_buttons.a = 0xFF;
+    gamepad(0)->analog_buttons.x = 0xFF / 2;
+    gamepad(0)->analog_buttons.y = 0xFF / 4;
 }
 ```
 
@@ -103,4 +112,14 @@ void read_rumble_values()
 
     gp->reset_rumble(gp); // resets rumble values to zero
 }
+```
+There are several function pointers within the gamepad object:
+```
+Gamepad* gp = gamepad(0);
+
+gp->reset_pad(gp); // resets all buttons, triggers, joysticks
+gp->reset_buttons(gp); // reset all analog and digital buttons
+gp->reset_triggers(gp); // reset all triggers
+gp->reset_joysticks(gp); // reset all joysticks
+gp->reset_rumble(gp); // reset rumble values
 ```

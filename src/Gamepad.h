@@ -116,7 +116,7 @@ struct Gamepad
 	GamepadJoysticks 	 joysticks;
     GamepadRumble 	 	 rumble;
 
-	bool use_analog_buttons;
+	bool enable_analog_buttons;
 
     GamepadResetPadFunc 			reset_pad;
 	GamepadResetButtonsFunc 		reset_buttons;

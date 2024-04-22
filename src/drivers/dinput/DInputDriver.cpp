@@ -92,7 +92,7 @@ void DInputDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer)
     dinput_report.ps_btn        = gamepad->buttons.sys    ? 1 : 0;
     dinput_report.tp_btn        = gamepad->buttons.misc   ? 1 : 0;
 
-    if (gamepad->use_analog_buttons)
+    if (gamepad->enable_analog_buttons)
     {
         dinput_report.right_axis    = gamepad->analog_buttons.right;
         dinput_report.left_axis     = gamepad->analog_buttons.left;

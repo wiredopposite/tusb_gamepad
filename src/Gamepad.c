@@ -32,8 +32,8 @@ void reset_rumble(Gamepad *gamepad)
 
 void initialize_gamepad(Gamepad *gamepad) 
 {
-    gamepad->use_analog_buttons = false;
-    
+    gamepad->enable_analog_buttons = false;
+
     gamepad->reset_pad       = reset_pad;
     gamepad->reset_buttons   = reset_buttons;
     gamepad->reset_triggers  = reset_triggers;
