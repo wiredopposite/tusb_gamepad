@@ -38,33 +38,15 @@ Here's how the file will look:
 ```
 The library will automatically redefine some things in your tusb_config.h file to make sure everything works properly with tusb_gamepad.
 
-### Template/example projects
-
-I've made a couple of template projects to demonstrate integrating this library into your project. The ESP-IDF components system can be troublsome so hopefully this helps.
-
-- ESP-IDF: 
-- PICO-SDK: 
-
 ## Usage
 This library is still in very eary development so usage is subject to change. 
 
-You choose an InputMode from these options:
-```
-enum InputMode
-{
-    INPUT_MODE_XINPUT,
-    INPUT_MODE_SWITCH,
-    INPUT_MODE_HID,
-    INPUT_MODE_PSCLASSIC,
-    INPUT_MODE_XBOXORIGINAL,
-    INPUT_MODE_USBSERIAL,
-    INPUT_MODE_UART_BRIDGE,
-};
-```
+### Template/example projects
 
-INPUT_MODE_USBSERIAL and INPUT_MODE_UART_BRIDGE are both for the RP2040 only and there incase you'd like to use it as a UART programmer (INPUT_MODE_UART_BRIDGE) or get debug print statements via USB (INPUT_MODE_USBSERIAL). 
+I've made a couple of template projects to demonstrate integrating and using this library in your project. Integrating TinyUSB with ESP-IDF was troublesome for me at first so hopefully this helps.
 
-A more detailed explanation of these modes is at the bottom of this README.
+- ESP-IDF: https://github.com/wiredopposite/tusb_gamepad_example_esp-idf
+- PICO-SDK: 
 
 ### Interacting with the gamepad object
 To change the gamepad object's button, trigger, and joystick values or read rumble values:
