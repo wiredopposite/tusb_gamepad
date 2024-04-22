@@ -24,7 +24,8 @@ public:
     virtual void update_rumble(int idx, Gamepad * gamepad);
 private:
     uint8_t last_report[CFG_TUD_ENDPOINT0_SIZE] = { };
-    XboxOriginalReport xboxOriginalReport;
+    XboxOriginalReport xboxog_report;
+    XboxOriginalOutReport xboxog_out_report;
 };
 
 #endif // _XBOX_ORIGINAL_DRIVER_H_

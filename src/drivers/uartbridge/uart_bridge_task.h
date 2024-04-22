@@ -1,18 +1,19 @@
-#ifdef _UARTBRIDGEDRIVER_H_
+#ifndef ESP_PLATFORM
 
-#ifndef UART_BRIDGE_TASK_H_
-#define UART_BRIDGE_TASK_H_
+#ifndef _UART_BRIDGE_TASK_H_
+#define _UART_BRIDGE_TASK_H_
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+void init_uart_bridge(int uart0_tx_pin, int uart0_rx_pin);
 void uart_bridge_task();
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // UART_BRIDGE_TASK_H_
+#endif // _UART_BRIDGE_TASK_H_
 
-#endif // _UARTBRIDGEDRIVER_H_
+#endif // ESP_PLATFORM

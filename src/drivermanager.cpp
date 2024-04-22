@@ -15,7 +15,7 @@ void DriverManager::setup(InputMode mode)
 {
     switch (mode) 
     {
-        case INPUT_MODE_HID:
+        case INPUT_MODE_DINPUT:
             // driver = new HIDDriver();
             driver = new DInputDriver();
             // driver = new PS3Driver();
@@ -35,7 +35,7 @@ void DriverManager::setup(InputMode mode)
         case INPUT_MODE_USBSERIAL:
             driver = new USBSerialDriver();
             break;
-        #ifdef PICO_SDK_VERSION_STRING
+        #ifndef ESP_PLATFORM
         case INPUT_MODE_UART_BRIDGE:
             driver = new UARTBridgeDriver();
             break;

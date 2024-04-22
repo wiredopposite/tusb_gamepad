@@ -1,3 +1,5 @@
+set(lib_name tusb_gamepad)
+
 set(executables
     ${CMAKE_CURRENT_SOURCE_DIR}/src/usbdriver.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/src/drivermanager.cpp
@@ -32,15 +34,16 @@ elseif(PICO_SDK_VERSION_STRING)
     list(APPEND executables
         ${CMAKE_CURRENT_SOURCE_DIR}/src/drivers/uartbridge/UARTBridgeDriver.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/drivers/uartbridge/uart_bridge.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/drivers/uartbridge/esp32_prog_task.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/drivers/uartbridge/uart_bridge_task.cpp)
 
-    add_library(tusb_gamepad ${executables})
+    add_library(${lib_name} ${executables})
 
     target_include_directories(tusb_gamepad PUBLIC 
-                                ${CMAKE_CURRENT_SOURCE_DIR}/src 
+                                ${CMAKE_CURRENT_SOURCE_DIR}/src
                                 ${CMAKE_CURRENT_SOURCE_DIR}/src/descriptors)
 
-    target_link_libraries(  pico_multicore
+    target_link_libraries(${lib_name} 
+                            pico_multicore
                             pico_stdlib
                             hardware_flash
                             hardware_uart
@@ -50,6 +53,6 @@ elseif(PICO_SDK_VERSION_STRING)
                             tinyusb_board
                             )
 else()
-    message(FATAL_ERROR "Unsupported platform, RP2040 or ESP-IDF required.")
+    message(FATAL_ERROR "Unsupported platform, Pico-SDK or ESP-IDF required.")
 endif()
 

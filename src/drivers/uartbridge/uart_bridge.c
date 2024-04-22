@@ -4,8 +4,6 @@
  * Copyright 2021 Álvaro Fernández Rojas <noltari@gmail.com>
  */
 
-#ifdef _UARTBRIDGEDRIVER_H_
-
 #include <hardware/irq.h>
 #include <hardware/structs/sio.h>
 #include <hardware/uart.h>
@@ -16,8 +14,8 @@
 #include <tusb.h>
 
 #include "board_config.h"
-#include "drivers/uartbridge/uart_bridge.h"
 #include "descriptors/UARTBridgeDescriptors.h"
+#include "drivers/uartbridge/uart_bridge.h"
 
 #if !defined(MIN)
 #define MIN(a, b) ((a > b) ? b : a)
@@ -55,13 +53,23 @@ typedef struct {
 void uart0_irq_fn(void);
 void uart1_irq_fn(void);
 
-const uart_id_t UART_ID[CFG_TUD_CDC] = {
+// const uart_id_t UART_ID[CFG_TUD_CDC] = {
+// 	{
+// 		.inst = uart0,
+// 		.irq = UART0_IRQ,
+// 		.irq_fn = &uart0_irq_fn,
+// 		.tx_pin = UART0_TX_PIN,
+// 		.rx_pin = UART0_RX_PIN,
+// 	}
+// };
+
+uart_id_t UART_ID[CFG_TUD_CDC] = {
 	{
 		.inst = uart0,
 		.irq = UART0_IRQ,
 		.irq_fn = &uart0_irq_fn,
-		.tx_pin = UART0_TX_PIN,
-		.rx_pin = UART0_RX_PIN,
+		// .tx_pin = pico_uart0_tx_pin,
+		// .rx_pin = pico_uart0_rx_pin,
 	}
 };
 
@@ -299,8 +307,14 @@ void init_uart_data(uint8_t itf)
 	uart_set_irq_enables(ui->inst, true, false);
 }
 
-void usbd_serial_init(void)
+void usbd_serial_init(int pico_uart0_tx_pin, int pico_uart0_rx_pin)
 {
+    for (int i = 0; i < CFG_TUD_CDC; i++) 
+	{
+        UART_ID[i].tx_pin = pico_uart0_tx_pin;
+        UART_ID[i].rx_pin = pico_uart0_rx_pin;
+    }
+
 	uint8_t id[8];
 
 	flash_get_unique_id(id);
@@ -310,5 +324,3 @@ void usbd_serial_init(void)
 	snprintf(usbd_serial, USBD_STR_SERIAL_LEN, "%02X%02X%02X%02X%02X%02X%02X%02X",
 		 id[0], id[1], id[2], id[3], id[4], id[5], id[6], id[7]);
 }
-
-#endif // _UARTBRIDGEDRIVER_H_

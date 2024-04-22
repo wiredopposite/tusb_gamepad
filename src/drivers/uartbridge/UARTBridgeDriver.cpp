@@ -1,5 +1,3 @@
-#ifdef _UARTBRIDGEDRIVER_H_
-
 #include "stdint.h"
 #include <hardware/irq.h>
 #include <hardware/structs/sio.h>
@@ -13,8 +11,8 @@
 #include "device/usbd_pvt.h"
 #include "class/cdc/cdc_device.h"
 
-#include "drivers/uartbridge/UARTBridgeDriver.h"
 #include "drivers/uartbridge/uart_bridge.h"
+#include "drivers/uartbridge/UARTBridgeDriver.h"
 #include "descriptors/UARTBridgeDescriptors.h"
 
 void UARTBridgeDriver::initialize()
@@ -46,9 +44,7 @@ uint16_t UARTBridgeDriver::get_report(uint8_t report_id, hid_report_type_t repor
 	return sizeof(buffer);
 }
 
-void UARTBridgeDriver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) 
-{
-}
+void UARTBridgeDriver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) {}
 
 bool UARTBridgeDriver::vendor_control_xfer_cb(uint8_t rhport, uint8_t stage, tusb_control_request_t const *request) 
 {
@@ -90,22 +86,24 @@ const uint16_t * UARTBridgeDriver::get_descriptor_string_cb(uint8_t index, uint1
 	return desc_str;
 }
 
-const uint8_t * UARTBridgeDriver::get_descriptor_device_cb() {
+const uint8_t * UARTBridgeDriver::get_descriptor_device_cb() 
+{
     return (const uint8_t *) &uart_device_descriptor;
 }
 
-const uint8_t * UARTBridgeDriver::get_hid_descriptor_report_cb(uint8_t itf) {
+const uint8_t * UARTBridgeDriver::get_hid_descriptor_report_cb(uint8_t itf) 
+{
     return nullptr;
 }
 
-const uint8_t * UARTBridgeDriver::get_descriptor_configuration_cb(uint8_t index) {
+const uint8_t * UARTBridgeDriver::get_descriptor_configuration_cb(uint8_t index) 
+{
     return uart_configuration_descriptor;
 }
 
-const uint8_t * UARTBridgeDriver::get_descriptor_device_qualifier_cb() {
+const uint8_t * UARTBridgeDriver::get_descriptor_device_qualifier_cb() 
+{
 	return nullptr;
 }
 
 void UARTBridgeDriver::update_rumble(int idx, Gamepad * gamepad) {}
-
-#endif // _UARTBRIDGEDRIVER_H_

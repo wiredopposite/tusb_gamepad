@@ -4,6 +4,7 @@
 void reset_buttons(Gamepad *gamepad) 
 {
     memset(&(gamepad->buttons), 0, sizeof(GamepadButtons));
+    memset(&(gamepad->analog_buttons), 0, sizeof(GamepadAnalogButtons));
 }
 
 void reset_triggers(Gamepad *gamepad) 
@@ -19,6 +20,7 @@ void reset_joysticks(Gamepad *gamepad)
 void reset_pad(Gamepad *gamepad) 
 {
     memset(&(gamepad->buttons), 0, sizeof(GamepadButtons));
+    memset(&(gamepad->analog_buttons), 0, sizeof(GamepadAnalogButtons));
     memset(&(gamepad->triggers), 0, sizeof(GamepadTriggers));
     memset(&(gamepad->joysticks), 0, sizeof(GamepadJoysticks));
 }
@@ -30,11 +32,14 @@ void reset_rumble(Gamepad *gamepad)
 
 void initialize_gamepad(Gamepad *gamepad) 
 {
+    gamepad->use_analog_buttons = false;
+    
     gamepad->reset_pad       = reset_pad;
     gamepad->reset_buttons   = reset_buttons;
     gamepad->reset_triggers  = reset_triggers;
     gamepad->reset_joysticks = reset_joysticks;
     gamepad->reset_rumble    = reset_rumble;
+
     gamepad->reset_pad(gamepad);
     gamepad->reset_rumble(gamepad);
 }

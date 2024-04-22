@@ -1,4 +1,4 @@
-#ifdef PICO_SDK_VERSION_STRING
+#ifndef ESP_PLATFORM
 
 #ifndef _UARTBRIDGEDRIVER_H_
 #define _UARTBRIDGEDRIVER_H_
@@ -24,4 +24,4 @@ class UARTBridgeDriver : public GPDriver
 
 #endif // _UARTBRIDGEDRIVER_H_
 
-#endif // PICO_SDK_VERSION_STRING
+#endif // ESP_PLATFORM

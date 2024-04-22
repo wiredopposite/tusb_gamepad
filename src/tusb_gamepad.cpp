@@ -13,7 +13,6 @@ Gamepad local_gamepad;
 void init_tusb_gamepad(enum InputMode mode)
 {
     DriverManager& driverManager = DriverManager::getInstance();
-    // driverManager = DriverManager::getInstance();
     driverManager.setup(mode);
 }
 
@@ -29,7 +28,7 @@ void tusb_gamepad_task()
             local_gamepad = *gamepad(i);
             uint8_t outBuffer[64];
             driver->process(i, &local_gamepad, outBuffer); // Dereference the pointer when passing to process
-            driver->update_rumble(i, gamepad(i));       // Pass the pointer directly to update_rumble
+            driver->update_rumble(i, gamepad(i)); // Pass the pointer directly to update_rumble
         }
 
         #ifdef ESP_PLATFORM

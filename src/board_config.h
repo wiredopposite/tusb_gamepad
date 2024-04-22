@@ -3,42 +3,35 @@
 
 #include "tusb_config.h"
 
+#ifndef ESP_PLATFORM
+    #include "pico/version.h"
+#endif
+
 #ifdef __cplusplus
     extern "C" {
+#endif
+
+#ifndef PICO_SDK_VERSION_STRING
+    #error "PICO_SDK_VERSION_STRING is not defined" // Assuming this matches the SDK version you use
 #endif
 
 #ifdef _TUSB_GAMEPAD_CONFIG_H_
     #include "tusb_gamepad_config.h"
 #endif
 
-#ifdef PICO_SDK_VERSION_STRING
-    #ifndef MAX_GAMEPADS
+#ifndef MAX_GAMEPADS
+    #ifdef PICO_SDK_VERSION_STRING
         #define MAX_GAMEPADS 1
-    #endif
-
-    #ifndef UART0_TX_PIN
-        #define UART0_TX_PIN 16
-    #endif
-
-    #ifndef UART0_RX_PIN
-        #define UART0_RX_PIN 17
-    #endif
-
-#elif defined(ESP_PLATFORM)
-    #include "sdkconfig.h"
-
-    #ifdef CONFIG_BLUEPAD32_MAX_DEVICES
-        #undef MAX_GAMEPADS
-        #define MAX_GAMEPADS CONFIG_BLUEPAD32_MAX_DEVICES
-    #else
-        #ifndef MAX_GAMEPADS
+    #elif defined(ESP_PLATFORM)
+        #include "sdkconfig.h"
+        #ifdef CONFIG_BLUEPAD32_MAX_DEVICES
+            #define MAX_GAMEPADS CONFIG_BLUEPAD32_MAX_DEVICES
+        #else
             #define MAX_GAMEPADS 1
         #endif
     #endif
+#endif
 
-#endif 
-
-// define min for ESP32
 #ifndef MIN
     #define MIN(a,b) (((a) < (b)) ? (a) : (b))
 #endif
@@ -88,12 +81,12 @@
 #endif
 
 // RHPORT
-#ifdef PICO_SDK_VERSION_STRING
+#ifdef TUD_OPT_RHPORT
     #define TUSB_GAMEPAD_RHPORT TUD_OPT_RHPORT
-#elif defined(ESP_PLATFORM)
+#elif defined(BOARD_TUD_RHPORT)
     #define TUSB_GAMEPAD_RHPORT BOARD_TUD_RHPORT
 #else
-    #error "Unsupported tusb_gamepad platform, Pico-SDK or ESP-IDF required"
+    #define TUSB_GAMEPAD_RHPORT 0
 #endif
 
 #ifdef __cplusplus

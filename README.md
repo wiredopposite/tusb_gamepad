@@ -27,13 +27,6 @@ Here's how the file will look:
 #define MAX_GAMEPADS       1 // Max number of gamepads, this is used to add HID interfaces for PlayStation 3 and Switch, otherwise leave at 1.
 #define TUSB_CDC_DEBUG     0 // Set to 1 for CDC device, helpful for print debugging USB host. Include utilities/log.h and use log() as you would printf().
 
-/*  Only used for the RP2040 and currently only works with UART0 pins, 
-    set InputMode to INPUT_MODE_UART_BRIDGE to use it as a UART bridge. 
-    Include drivers/uartbridge/uart_bridge_task.h and use uart_bridge_task().
-    The function doesn't return.*/
-#define UART0_TX_PIN 16
-#define UART0_RX_PIN 17
-
 #endif // _TUSB_GAMEPAD_CONFIG_H_
 ```
 The library will automatically redefine some things in your tusb_config.h file to make sure everything works properly with tusb_gamepad.

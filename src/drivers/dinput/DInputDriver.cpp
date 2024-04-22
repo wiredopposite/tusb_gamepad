@@ -92,12 +92,32 @@ void DInputDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer)
     dinput_report.ps_btn        = gamepad->buttons.sys    ? 1 : 0;
     dinput_report.tp_btn        = gamepad->buttons.misc   ? 1 : 0;
 
-    dinput_report.cross_axis    = gamepad->buttons.a  ? 0xFF : 0x00;
-    dinput_report.circle_axis   = gamepad->buttons.b  ? 0xFF : 0x00;
-    dinput_report.square_axis   = gamepad->buttons.x  ? 0xFF : 0x00;
-    dinput_report.triangle_axis = gamepad->buttons.y  ? 0xFF : 0x00;
-    dinput_report.l1_axis       = gamepad->buttons.lb ? 0xFF : 0x00;
-    dinput_report.r1_axis       = gamepad->buttons.rb ? 0xFF : 0x00;
+    if (gamepad->use_analog_buttons)
+    {
+        dinput_report.right_axis    = gamepad->analog_buttons.right;
+        dinput_report.left_axis     = gamepad->analog_buttons.left;
+        dinput_report.up_axis       = gamepad->analog_buttons.up;
+        dinput_report.down_axis     = gamepad->analog_buttons.down;
+        dinput_report.cross_axis    = gamepad->analog_buttons.a ;
+        dinput_report.circle_axis   = gamepad->analog_buttons.b ;
+        dinput_report.square_axis   = gamepad->analog_buttons.x ;
+        dinput_report.triangle_axis = gamepad->analog_buttons.y ;
+        dinput_report.l1_axis       = gamepad->analog_buttons.lb;
+        dinput_report.r1_axis       = gamepad->analog_buttons.rb;
+    }
+    else
+    {
+        dinput_report.right_axis    = gamepad->analog_buttons.right ? 0xFF : 0;
+        dinput_report.left_axis     = gamepad->analog_buttons.left  ? 0xFF : 0;
+        dinput_report.up_axis       = gamepad->analog_buttons.up    ? 0xFF : 0;
+        dinput_report.down_axis     = gamepad->analog_buttons.down  ? 0xFF : 0;
+        dinput_report.cross_axis    = gamepad->analog_buttons.a     ? 0xFF : 0;
+        dinput_report.circle_axis   = gamepad->analog_buttons.b     ? 0xFF : 0;
+        dinput_report.square_axis   = gamepad->analog_buttons.x     ? 0xFF : 0;
+        dinput_report.triangle_axis = gamepad->analog_buttons.y     ? 0xFF : 0;
+        dinput_report.l1_axis       = gamepad->analog_buttons.lb    ? 0xFF : 0;
+        dinput_report.r1_axis       = gamepad->analog_buttons.rb    ? 0xFF : 0;
+    }
 
     dinput_report.l2_axis = gamepad->triggers.l;
     dinput_report.r2_axis = gamepad->triggers.r;
