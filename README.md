@@ -12,7 +12,7 @@ A library that can emulate gamepads for several platforms using TinyUSB. Current
 You will need TinyUSB added to your project, tusb_gamepad implements all necessary TinyUSB callbacks for you. 
 
 ### Config file
-You will need to add these line to your tusb_config.h file:
+You will need to add these lines to your tusb_config.h file:
 ```
 #include "board_config.h"
 
@@ -33,7 +33,7 @@ I've made a couple template projects to demonstrate integrating and using this l
 ### Interacting with the gamepad object
 To change the gamepad object's button, trigger, and joystick values or read rumble values:
 
-If you're only using one gamepad (MAX_GAMEPADS = 1), pass 0 as idx to gamepad(int idx):
+If you're only using one gamepad (MAX_GAMEPADS = 1), pass 0 as the arg to gamepad(int idx):
 ```
 #include "tusb_gamepad.h"
 
@@ -43,9 +43,8 @@ void update_gamepad()
 
     gp->reset_pad(gp);        // resets buttons, triggers, and joysticks
 
-    // different way to enable buttons, which are a uint16_t button mask
+    // different way to enable buttons, which are a button mask
     gp->buttons.a   = 1;
-    gp->buttons    |= GP_BUTTON_B;
     gp->buttons.x   = true;
 
     gp->triggers.l   = 0xFF;  // triggers are uint8_t

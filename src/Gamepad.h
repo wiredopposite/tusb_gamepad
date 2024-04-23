@@ -29,22 +29,22 @@ extern "C" {
 // 	bool misc	;
 // } GamepadButtons;
 
-#define GP_BUTTON_UP    0x0001
-#define GP_BUTTON_DOWN  0x0002
-#define GP_BUTTON_LEFT  0x0004
-#define GP_BUTTON_RIGHT 0x0008
-#define GP_BUTTON_A     0x0010
-#define GP_BUTTON_B     0x0020
-#define GP_BUTTON_X     0x0040
-#define GP_BUTTON_Y     0x0080
-#define GP_BUTTON_L3    0x0100
-#define GP_BUTTON_R3    0x0200
-#define GP_BUTTON_BACK  0x0400
-#define GP_BUTTON_START 0x0800
-#define GP_BUTTON_LB    0x1000
-#define GP_BUTTON_RB    0x2000
-#define GP_BUTTON_SYS   0x4000
-#define GP_BUTTON_MISC  0x8000
+// #define GP_BUTTON_UP    0x0001
+// #define GP_BUTTON_DOWN  0x0002
+// #define GP_BUTTON_LEFT  0x0004
+// #define GP_BUTTON_RIGHT 0x0008
+// #define GP_BUTTON_A     0x0010
+// #define GP_BUTTON_B     0x0020
+// #define GP_BUTTON_X     0x0040
+// #define GP_BUTTON_Y     0x0080
+// #define GP_BUTTON_L3    0x0100
+// #define GP_BUTTON_R3    0x0200
+// #define GP_BUTTON_BACK  0x0400
+// #define GP_BUTTON_START 0x0800
+// #define GP_BUTTON_LB    0x1000
+// #define GP_BUTTON_RB    0x2000
+// #define GP_BUTTON_SYS   0x4000
+// #define GP_BUTTON_MISC  0x8000
 
 typedef struct 
 {
@@ -125,12 +125,12 @@ struct Gamepad
     GamepadResetRumbleFunc  		reset_rumble;
 };
 
-void reset_pad(Gamepad *gamepad);
-void reset_buttons(Gamepad *gamepad);
-void reset_triggers(Gamepad *gamepad);
-void reset_joysticks(Gamepad *gamepad);
-void reset_rumble(Gamepad *gamepad);
-void initialize_gamepad(Gamepad *gamepad);
+// void reset_pad(Gamepad *gamepad);
+// void reset_buttons(Gamepad *gamepad);
+// void reset_triggers(Gamepad *gamepad);
+// void reset_joysticks(Gamepad *gamepad);
+// void reset_rumble(Gamepad *gamepad);
+// void initialize_gamepad(Gamepad *gamepad);
 Gamepad *gamepad(int idx);
 
 #ifdef __cplusplus
