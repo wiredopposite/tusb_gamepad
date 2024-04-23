@@ -18,17 +18,26 @@ You will need to add these lines to your tusb_config.h file:
 
 #define MAX_GAMEPADS 1 // or more if wanted for DInput/PlayStation 3
 ```
-The library will automatically redefine some TinyUSB settings to make sure everything works properly with tusb_gamepad.
+And also download the TinyUSB dependancies for your board:
+```
+cd tinyusb
+python tools/get_deps.py rp2040
+
+```
+While compiling, the library will automatically redefine some TinyUSB settings to make sure everything works properly with tusb_gamepad. To avoid getting redefine warnings from the compiler, you can just use a tusb_config.h file from one of the tusb_gamepad example projects listed below.
 
 ## Usage
 This library is still in very eary development so usage is subject to change. 
 
 ### Template/example projects
 
-I've made a couple template projects to demonstrate integrating and using this library in your project. Integrating TinyUSB with ESP-IDF was troublesome for me at first so hopefully this helps. Take note of the CMakeLists.txt files in each.
+I've made a couple template projects to demonstrate integrating and using this library in your project. Take note of the CMakeLists.txt files in each.
 
-- ESP-IDF: https://github.com/wiredopposite/tusb_gamepad_example_esp-idf
-- PICO-SDK: https://github.com/wiredopposite/tusb_gamepad_example_pico-sdk
+- ESP-IDF: 
+    - https://github.com/wiredopposite/tusb_gamepad_example_esp-idf
+- PICO-SDK: 
+    - https://github.com/wiredopposite/tusb_gamepad_example_pico-sdk
+    - https://github.com/wiredopposite/tusb_gamepad_ds4_to_xinput_pico-sdk (uses Pico-PIO-USB)
 
 ### Interacting with the gamepad object
 To change the gamepad object's button, trigger, and joystick values or read rumble values:
