@@ -35,10 +35,10 @@ This library is still in very eary development so usage is subject to change.
 I've made a couple template projects to demonstrate integrating and using this library in your project. Take note of the CMakeLists.txt files in each.
 
 - ESP-IDF: 
-    - https://github.com/wiredopposite/tusb_gamepad_example_esp-idf
+    - https://github.com/wiredopposite/tusb_gamepad_example_esp-idf (device)
 - PICO-SDK: 
-    - https://github.com/wiredopposite/tusb_gamepad_example_pico-sdk
-    - https://github.com/wiredopposite/tusb_gamepad_ds4_to_xinput_pico-sdk (uses Pico-PIO-USB)
+    - https://github.com/wiredopposite/tusb_gamepad_example_pico-sdk (device)
+    - https://github.com/wiredopposite/tusb_gamepad_ds4_to_xinput_pico-sdk (device/host with pico-pio-usb)
 
 ### Interacting with the gamepad object
 To change the gamepad object's button, trigger, and joystick values or read rumble values:
