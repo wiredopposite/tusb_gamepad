@@ -10,6 +10,7 @@
 #include <string.h>
 
 #include <tusb.h>
+#include "bsp/board_api.h"
 #include "device/usbd_pvt.h"
 #include "class/cdc/cdc_device.h"
 

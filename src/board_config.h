@@ -1,7 +1,7 @@
 #ifndef _BOARD_CONFIG_H_
 #define _BOARD_CONFIG_H_
 
-#include "tusb_config.h"
+// #include "tusb_config.h"
 
 #ifndef ESP_PLATFORM
     #include "pico/version.h"

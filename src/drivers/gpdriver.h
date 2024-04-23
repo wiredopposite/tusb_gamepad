@@ -6,7 +6,7 @@
 #ifndef _GPDRIVER_H_
 #define _GPDRIVER_H_
 
-#include "tusb_config.h"
+// #include "tusb_config.h"
 #include "tusb.h"
 #include "class/hid/hid.h"
 #include "device/usbd_pvt.h"
