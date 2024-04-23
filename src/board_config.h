@@ -5,14 +5,14 @@
 
 #ifndef ESP_PLATFORM
     #include "pico/version.h"
+
+    #ifndef PICO_SDK_VERSION_STRING
+        #error "PICO_SDK_VERSION_STRING is not defined" // Assuming this matches the SDK version you use
+    #endif
 #endif
 
 #ifdef __cplusplus
     extern "C" {
-#endif
-
-#ifndef PICO_SDK_VERSION_STRING
-    #error "PICO_SDK_VERSION_STRING is not defined" // Assuming this matches the SDK version you use
 #endif
 
 #ifdef _TUSB_GAMEPAD_CONFIG_H_
