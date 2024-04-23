@@ -22,7 +22,6 @@ And also download the TinyUSB dependancies for your board:
 ```
 cd tinyusb
 python tools/get_deps.py rp2040
-
 ```
 While compiling, the library will automatically redefine some TinyUSB settings to make sure everything works properly with tusb_gamepad. To avoid getting redefine warnings from the compiler, you can just use a tusb_config.h file from one of the tusb_gamepad example projects listed below.
 
