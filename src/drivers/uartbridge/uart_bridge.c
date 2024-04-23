@@ -196,13 +196,13 @@ void core1_entry(void)
 
 	while (1) {
 		int itf;
-		int con = 0;
+		// int con = 0;
 
 		tud_task();
 
 		for (itf = 0; itf < CFG_TUD_CDC; itf++) {
 			if (tud_cdc_n_connected(itf)) {
-				con = 1;
+				// con = 1;
 				usb_cdc_process(itf);
 			}
 		}
