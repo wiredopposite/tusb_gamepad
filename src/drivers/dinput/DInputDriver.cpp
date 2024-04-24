@@ -53,6 +53,8 @@ void DInputDriver::initialize()
 // Generate HID report from gamepad and send to TUSB Device
 void DInputDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer) 
 {
+    (void)outBuffer;
+
     if (gamepad->buttons.up) {
         if (gamepad->buttons.right) {
             dinput_report.direction = DINPUT_HAT_UPRIGHT;
@@ -148,6 +150,10 @@ void DInputDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer)
 // tud_hid_get_report_cb
 uint16_t DInputDriver::get_report(uint8_t report_id, hid_report_type_t report_type, uint8_t *buffer, uint16_t reqlen) 
 {
+    (void)report_id;
+    (void)report_type;
+    (void)reqlen;
+
     memcpy(buffer, &dinput_report, sizeof(DInputReport));
     return sizeof(DInputReport);
 }
@@ -155,35 +161,26 @@ uint16_t DInputDriver::get_report(uint8_t report_id, hid_report_type_t report_ty
 // Only PS4 does anything with set report
 void DInputDriver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) 
 {
-    // testing things, I'll have a usb sniffer soon so this will get figured out then
-
-    // DInputOutReport dinput_out_report = {0};
-    // memcpy(&dinput_out_report, buffer, sizeof(dinput_out_report));
-
-    // // gamepadOut.out_state.rrumble = dinput_out_report.rumble.right_motor_on ? 0xFF : 0x00;
-    // // gamepadOut.out_state.lrumble = gamepadOut.out_state.rrumble = dinput_out_report.rumble.left_motor_force;
-
-    // // if (dinput_out_report.rumble.left_motor_force > 0)
-    // if (dinput_out_report.led->time_enabled > 0)
-    //     gamepadOut.out_state.lrumble = gamepadOut.out_state.rrumble = 0xFF;
-    // if (dinput_out_report.led->duty_length > 0)
-    //     gamepadOut.out_state.lrumble = gamepadOut.out_state.rrumble = 0xFF;
-    // if (dinput_out_report.led->enabled > 0)
-    //     gamepadOut.out_state.lrumble = gamepadOut.out_state.rrumble = 0xFF;
-    // if (dinput_out_report.led->duty_off > 0)
-    //     gamepadOut.out_state.lrumble = gamepadOut.out_state.rrumble = 0xFF;
-    // if (dinput_out_report.led->duty_on > 0)
-    //     gamepadOut.out_state.lrumble = gamepadOut.out_state.rrumble = 0xFF;
+    (void)report_id;
+    (void)report_type;
+    (void)buffer;
+    (void)bufsize;
 }
 
 // Only XboxOG and Xbox One use vendor control xfer cb
 bool DInputDriver::vendor_control_xfer_cb(uint8_t rhport, uint8_t stage, tusb_control_request_t const *request) 
 {
+    (void)rhport;
+    (void)stage;
+    (void)request;
+
     return false;
 }
 
 const uint16_t * DInputDriver::get_descriptor_string_cb(uint8_t index, uint16_t langid) 
 {
+    (void)langid;
+
 	const char *value = (const char *)dinput_string_descriptors[index];
 	return getStringDescriptor(value, index); // getStringDescriptor returns a static array
 }
@@ -195,11 +192,15 @@ const uint8_t * DInputDriver::get_descriptor_device_cb()
 
 const uint8_t * DInputDriver::get_hid_descriptor_report_cb(uint8_t itf) 
 {
+    (void)itf;
+
     return dinput_report_descriptor;
 }
 
 const uint8_t * DInputDriver::get_descriptor_configuration_cb(uint8_t index) 
 {
+    (void)index;
+
     return dinput_configuration_descriptor;
 }
 
@@ -210,5 +211,8 @@ const uint8_t * DInputDriver::get_descriptor_device_qualifier_cb()
 
 void DInputDriver::update_rumble(int idx, Gamepad * gamepad)
 {
+    (void)idx;
+    (void)gamepad;
+    
     return;
 }

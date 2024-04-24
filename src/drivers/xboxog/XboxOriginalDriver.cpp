@@ -5,7 +5,10 @@
 void XboxOriginalDriver::initialize() 
 {
     xboxog_report = {
+        .zero = 0,
+        .bLength = sizeof(XboxOriginalReport),
         .dButtons = 0,
+        .reserved = 0,
         .A = 0,
         .B = 0,
         .X = 0,
@@ -26,6 +29,9 @@ void XboxOriginalDriver::initialize()
 
 void XboxOriginalDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer) 
 {
+    (void)idx;
+    (void)outBuffer;
+
 	xboxog_report.dButtons = 0
 		| (gamepad->buttons.up    ? XID_DUP    : 0)
 		| (gamepad->buttons.down  ? XID_DDOWN  : 0)
@@ -82,11 +88,21 @@ void XboxOriginalDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer
 
 uint16_t XboxOriginalDriver::get_report(uint8_t report_id, hid_report_type_t report_type, uint8_t *buffer, uint16_t reqlen) 
 {
+    (void)report_id;
+    (void)report_type;
+    (void)reqlen;
+
     memcpy(buffer, &xboxog_report, sizeof(XboxOriginalReport));
 	return sizeof(XboxOriginalReport);
 }
 
-void XboxOriginalDriver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) {}
+void XboxOriginalDriver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) 
+{
+    (void)report_id;
+    (void)report_type;
+    (void)bufsize;
+    (void)buffer;
+}
 
 bool XboxOriginalDriver::vendor_control_xfer_cb(uint8_t rhport, uint8_t stage, tusb_control_request_t const *request) 
 {
@@ -95,6 +111,8 @@ bool XboxOriginalDriver::vendor_control_xfer_cb(uint8_t rhport, uint8_t stage, t
 
 const uint16_t * XboxOriginalDriver::get_descriptor_string_cb(uint8_t index, uint16_t langid) 
 {
+    (void)langid;
+
 	const char *value = (const char *)xboxoriginal_string_descriptors[index];
 	return getStringDescriptor(value, index); // getStringDescriptor returns a static array
 }
@@ -106,11 +124,15 @@ const uint8_t * XboxOriginalDriver::get_descriptor_device_cb()
 
 const uint8_t * XboxOriginalDriver::get_hid_descriptor_report_cb(uint8_t itf) 
 {
+    (void)itf;
+
     return nullptr;
 }
 
 const uint8_t * XboxOriginalDriver::get_descriptor_configuration_cb(uint8_t index) 
 {
+    (void)index;
+
     return xboxoriginal_configuration_descriptor;
 }
 
@@ -121,6 +143,8 @@ const uint8_t * XboxOriginalDriver::get_descriptor_device_qualifier_cb()
 
 void XboxOriginalDriver::update_rumble(int idx, Gamepad * gamepad)
 {
+    (void)idx;
+
     if (xboxog_out_report.zero == 0 && 
         xboxog_out_report.bLength == sizeof(XboxOriginalOutReport))
     {

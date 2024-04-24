@@ -32,6 +32,10 @@ void UARTBridgeDriver::initialize()
 
 void UARTBridgeDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer) 
 {
+	(void)idx;
+	(void)gamepad;
+	(void)outBuffer;
+
 	for (itf = 0; itf < CFG_TUD_CDC; itf++) 
 	{
 		update_uart_cfg(itf);
@@ -41,18 +45,34 @@ void UARTBridgeDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer)
 
 uint16_t UARTBridgeDriver::get_report(uint8_t report_id, hid_report_type_t report_type, uint8_t *buffer, uint16_t reqlen)
 {
+	(void)report_id;
+	(void)report_type;
+	(void)reqlen;
+
 	return sizeof(buffer);
 }
 
-void UARTBridgeDriver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) {}
+void UARTBridgeDriver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) 
+{
+	(void)report_id;
+	(void)report_type;
+	(void)buffer;
+	(void)bufsize;
+}
 
 bool UARTBridgeDriver::vendor_control_xfer_cb(uint8_t rhport, uint8_t stage, tusb_control_request_t const *request) 
 {
+	(void)rhport;
+	(void)stage;
+	(void)request;
+
     return false;
 }
 
 const uint16_t * UARTBridgeDriver::get_descriptor_string_cb(uint8_t index, uint16_t langid) 
 {
+	(void)langid;
+
 	static char usbd_serial[USBD_STR_SERIAL_LEN] = "000000000000";
 
 	static const char *const usbd_desc_str[] = {
@@ -93,11 +113,15 @@ const uint8_t * UARTBridgeDriver::get_descriptor_device_cb()
 
 const uint8_t * UARTBridgeDriver::get_hid_descriptor_report_cb(uint8_t itf) 
 {
+	(void)itf;
+
     return nullptr;
 }
 
 const uint8_t * UARTBridgeDriver::get_descriptor_configuration_cb(uint8_t index) 
 {
+	(void)index;
+
     return uart_configuration_descriptor;
 }
 
@@ -106,4 +130,8 @@ const uint8_t * UARTBridgeDriver::get_descriptor_device_qualifier_cb()
 	return nullptr;
 }
 
-void UARTBridgeDriver::update_rumble(int idx, Gamepad * gamepad) {}
+void UARTBridgeDriver::update_rumble(int idx, Gamepad * gamepad) 
+{
+	(void)idx;
+	(void)gamepad;
+}

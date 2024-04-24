@@ -52,7 +52,9 @@ void HIDDriver::initialize()
 // Generate HID report from gamepad and send to TUSB Device
 void HIDDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer) 
 {
-   if (gamepad->buttons.up) {
+    (void)outBuffer;
+
+    if (gamepad->buttons.up) {
         if (gamepad->buttons.right) {
             hidReport.direction = HID_HAT_UPRIGHT;
         } else if (gamepad->buttons.left) {
@@ -125,21 +127,37 @@ void HIDDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer)
 // tud_hid_get_report_cb
 uint16_t HIDDriver::get_report(uint8_t report_id, hid_report_type_t report_type, uint8_t *buffer, uint16_t reqlen) 
 {
+    (void)report_id;
+    (void)report_type;
+    (void)reqlen;
+
     memcpy(buffer, &hidReport, sizeof(HIDReport));
 	return sizeof(HIDReport);
 }
 
 // Only PS4 does anything with set report
-void HIDDriver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) {}
+void HIDDriver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) 
+{
+    (void)report_id;
+    (void)report_type;
+    (void)buffer;
+    (void)bufsize;
+}
 
 // Only XboxOG and Xbox One use vendor control xfer cb
 bool HIDDriver::vendor_control_xfer_cb(uint8_t rhport, uint8_t stage, tusb_control_request_t const *request) 
 {
+    (void)rhport;
+    (void)stage;
+    (void)request;
+
     return false;
 }
 
 const uint16_t * HIDDriver::get_descriptor_string_cb(uint8_t index, uint16_t langid) 
 {
+    (void)langid;
+
 	const char *value = (const char *)hid_string_descriptors[index];
 	return getStringDescriptor(value, index); // getStringDescriptor returns a static array
 }
@@ -151,11 +169,15 @@ const uint8_t * HIDDriver::get_descriptor_device_cb()
 
 const uint8_t * HIDDriver::get_hid_descriptor_report_cb(uint8_t itf) 
 {
+    (void)itf;
+
     return hid_report_descriptor;
 }
 
 const uint8_t * HIDDriver::get_descriptor_configuration_cb(uint8_t index) 
 {
+    (void)index;
+
     return hid_configuration_descriptor;
 }
 
@@ -166,5 +188,6 @@ const uint8_t * HIDDriver::get_descriptor_device_qualifier_cb()
 
 void HIDDriver::update_rumble(int idx, Gamepad * gamepad)
 {
-    
+    (void)idx;
+    (void)gamepad;
 }

@@ -19,7 +19,10 @@ void PSClassicDriver::initialize() {
 	};
 }
 
-void PSClassicDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer) {
+void PSClassicDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer) 
+{
+    (void)outBuffer;
+
     psClassicReport.buttons = PSCLASSIC_MASK_CENTER;
 
     if (gamepad->buttons.up) {
@@ -117,41 +120,69 @@ void PSClassicDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer) {
 }
 
 // tud_hid_get_report_cb
-uint16_t PSClassicDriver::get_report(uint8_t report_id, hid_report_type_t report_type, uint8_t *buffer, uint16_t reqlen) {
+uint16_t PSClassicDriver::get_report(uint8_t report_id, hid_report_type_t report_type, uint8_t *buffer, uint16_t reqlen) 
+{
+    (void)report_id;
+    (void)report_type;
+    (void)reqlen;
+
     memcpy(buffer, &psClassicReport, sizeof(PSClassicReport));
 	return sizeof(PSClassicReport);
 }
 
 // Only PS4 does anything with set report
-void PSClassicDriver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) {}
+void PSClassicDriver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) 
+{
+    (void)report_id;
+    (void)report_type;
+    (void)buffer;
+    (void)bufsize;
+}
 
 // Only XboxOG and Xbox One use vendor control xfer cb
-bool PSClassicDriver::vendor_control_xfer_cb(uint8_t rhport, uint8_t stage, tusb_control_request_t const *request) {
+bool PSClassicDriver::vendor_control_xfer_cb(uint8_t rhport, uint8_t stage, tusb_control_request_t const *request) 
+{
+    (void)rhport;
+    (void)stage;
+    (void)request;
+
     return false;
 }
 
-const uint16_t * PSClassicDriver::get_descriptor_string_cb(uint8_t index, uint16_t langid) {
+const uint16_t * PSClassicDriver::get_descriptor_string_cb(uint8_t index, uint16_t langid) 
+{
+    (void)langid;
+
 	const char *value = (const char *)psclassic_string_descriptors[index];
 	return getStringDescriptor(value, index); // getStringDescriptor returns a static array
 }
 
-const uint8_t * PSClassicDriver::get_descriptor_device_cb() {
+const uint8_t * PSClassicDriver::get_descriptor_device_cb() 
+{
     return psclassic_device_descriptor;
 }
 
-const uint8_t * PSClassicDriver::get_hid_descriptor_report_cb(uint8_t itf) {
+const uint8_t * PSClassicDriver::get_hid_descriptor_report_cb(uint8_t itf) 
+{
+    (void)itf;
+
     return psclassic_report_descriptor;
 }
 
-const uint8_t * PSClassicDriver::get_descriptor_configuration_cb(uint8_t index) {
+const uint8_t * PSClassicDriver::get_descriptor_configuration_cb(uint8_t index) 
+{
+    (void)index;
+
     return psclassic_configuration_descriptor;
 }
 
-const uint8_t * PSClassicDriver::get_descriptor_device_qualifier_cb() {
+const uint8_t * PSClassicDriver::get_descriptor_device_qualifier_cb() 
+{
 	return nullptr;
 }
 
 void PSClassicDriver::update_rumble(int idx, Gamepad * gamepad)
 {
-    
+    (void)idx;
+    (void)gamepad;
 }

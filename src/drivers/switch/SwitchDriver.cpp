@@ -31,6 +31,8 @@ void SwitchDriver::initialize()
 
 void SwitchDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer) 
 {
+	(void)outBuffer;
+
 	switchReport.hat = SWITCH_HAT_NOTHING;
 
     if (gamepad->buttons.up) 
@@ -111,41 +113,69 @@ void SwitchDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer)
 }
 
 // tud_hid_get_report_cb
-uint16_t SwitchDriver::get_report(uint8_t report_id, hid_report_type_t report_type, uint8_t *buffer, uint16_t reqlen) {
+uint16_t SwitchDriver::get_report(uint8_t report_id, hid_report_type_t report_type, uint8_t *buffer, uint16_t reqlen) 
+{
+	(void)report_id;
+	(void)report_type;
+	(void)reqlen;
+
     memcpy(buffer, &switchReport, sizeof(SwitchReport));
 	return sizeof(SwitchReport);
 }
 
 // Only PS4 does anything with set report
-void SwitchDriver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) {}
+void SwitchDriver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) 
+{
+	(void)report_id;
+	(void)report_type;
+	(void)buffer;
+	(void)bufsize;
+}
 
 // Only XboxOG and Xbox One use vendor control xfer cb
-bool SwitchDriver::vendor_control_xfer_cb(uint8_t rhport, uint8_t stage, tusb_control_request_t const *request) {
+bool SwitchDriver::vendor_control_xfer_cb(uint8_t rhport, uint8_t stage, tusb_control_request_t const *request) 
+{
+	(void)rhport;
+	(void)stage;
+	(void)request;
+
     return false;
 }
 
-const uint16_t * SwitchDriver::get_descriptor_string_cb(uint8_t index, uint16_t langid) {
+const uint16_t * SwitchDriver::get_descriptor_string_cb(uint8_t index, uint16_t langid) 
+{
+	(void)langid;
+
 	const char *value = (const char *)switch_string_descriptors[index];
 	return getStringDescriptor(value, index); // getStringDescriptor returns a static array
 }
 
-const uint8_t * SwitchDriver::get_descriptor_device_cb() {
+const uint8_t * SwitchDriver::get_descriptor_device_cb() 
+{
     return switch_device_descriptor;
 }
 
-const uint8_t * SwitchDriver::get_hid_descriptor_report_cb(uint8_t itf) {
+const uint8_t * SwitchDriver::get_hid_descriptor_report_cb(uint8_t itf) 
+{
+	(void)itf;
+
     return switch_report_descriptor;
 }
 
-const uint8_t * SwitchDriver::get_descriptor_configuration_cb(uint8_t index) {
+const uint8_t * SwitchDriver::get_descriptor_configuration_cb(uint8_t index) 
+{
+	(void)index;
+
     return switch_configuration_descriptor;
 }
 
-const uint8_t * SwitchDriver::get_descriptor_device_qualifier_cb() {
+const uint8_t * SwitchDriver::get_descriptor_device_qualifier_cb() 
+{
 	return nullptr;
 }
 
 void SwitchDriver::update_rumble(int idx, Gamepad * gamepad)
 {
-    
+	(void)idx;
+	(void)gamepad;
 }

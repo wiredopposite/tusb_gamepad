@@ -37,6 +37,10 @@ void USBSerialDriver::initialize()
 
 void USBSerialDriver::process(int idx, Gamepad * gamepad, uint8_t * outbuffer)
 {
+	(void)idx;
+	(void)gamepad;
+	(void)outbuffer;
+
     uint32_t bytes_written = tud_cdc_write_str(get_log());
 
     if (bytes_written == strlen(get_log())) 
@@ -50,13 +54,27 @@ void USBSerialDriver::process(int idx, Gamepad * gamepad, uint8_t * outbuffer)
 
 uint16_t USBSerialDriver::get_report(uint8_t report_id, hid_report_type_t report_type, uint8_t *buffer, uint16_t reqlen)
 {
+	(void)report_id;
+	(void)report_type;
+	(void)reqlen;
+
 	return sizeof(buffer);
 }
 
-void USBSerialDriver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) {}
+void USBSerialDriver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) 
+{
+	(void)report_id;
+	(void)report_type;
+	(void)buffer;
+	(void)bufsize;
+}
 
 bool USBSerialDriver::vendor_control_xfer_cb(uint8_t rhport, uint8_t stage, tusb_control_request_t const *request) 
 {
+	(void)rhport;
+	(void)stage;
+	(void)request;
+
     return false;
 }
 
@@ -109,11 +127,15 @@ const uint8_t * USBSerialDriver::get_descriptor_device_cb()
 
 const uint8_t * USBSerialDriver::get_hid_descriptor_report_cb(uint8_t itf) 
 {
+	(void)itf;
+
     return nullptr;
 }
 
 const uint8_t * USBSerialDriver::get_descriptor_configuration_cb(uint8_t index) 
 {
+	(void)index;
+
     return usbserial_configuration_descriptor;
 }
 
@@ -122,4 +144,8 @@ const uint8_t * USBSerialDriver::get_descriptor_device_qualifier_cb()
 	return nullptr;
 }
 
-void USBSerialDriver::update_rumble(int idx, Gamepad * gamepad) {}
+void USBSerialDriver::update_rumble(int idx, Gamepad * gamepad) 
+{
+	(void)idx;
+	(void)gamepad;
+}

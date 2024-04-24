@@ -110,6 +110,9 @@ void XInputDriver::initialize()
 
 void XInputDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer) 
 {
+	(void)idx;
+	(void)outBuffer;
+
 	xinputReport.buttons1 = 0
 		| (gamepad->buttons.up    ? XBOX_MASK_UP    : 0)
 		| (gamepad->buttons.down  ? XBOX_MASK_DOWN  : 0)
@@ -167,21 +170,37 @@ void XInputDriver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer)
 // tud_hid_get_report_cb
 uint16_t XInputDriver::get_report(uint8_t report_id, hid_report_type_t report_type, uint8_t *buffer, uint16_t reqlen) 
 {
+	(void)report_id;
+	(void)report_type;
+	(void)reqlen;
+
 	memcpy(buffer, &xinputReport, sizeof(XInputReport));
 	return sizeof(XInputReport);
 }
 
 // Only PS4 does anything with set report
-void XInputDriver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) {}
+void XInputDriver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) 
+{
+	(void)report_id;
+	(void)report_type;
+	(void)buffer;
+	(void)bufsize;
+}
 
 // Only XboxOG and Xbox One use vendor control xfer cb
 bool XInputDriver::vendor_control_xfer_cb(uint8_t rhport, uint8_t stage, tusb_control_request_t const *request) 
 {
+	(void)rhport;
+	(void)stage;
+	(void)request;
+
     return false;
 }
 
 const uint16_t * XInputDriver::get_descriptor_string_cb(uint8_t index, uint16_t langid) 
 {
+	(void)langid;
+
 	const char *value = (const char *)xinput_string_descriptors[index];
 	return getStringDescriptor(value, index); // getStringDescriptor returns a static array
 }
@@ -193,11 +212,15 @@ const uint8_t * XInputDriver::get_descriptor_device_cb()
 
 const uint8_t * XInputDriver::get_hid_descriptor_report_cb(uint8_t itf) 
 {
+	(void)itf;
+
     return nullptr;
 }
 
 const uint8_t * XInputDriver::get_descriptor_configuration_cb(uint8_t index) 
 {
+	(void)index;
+
     return xinput_configuration_descriptor;
 }
 
@@ -208,6 +231,8 @@ const uint8_t * XInputDriver::get_descriptor_device_qualifier_cb()
 
 void XInputDriver::update_rumble(int idx, Gamepad * gamepad)
 {
+	(void)idx;
+	
 	if (xinput_out_report.report_type == XBOX_REPORT_TYPE_RUMBLE &&
 		xinput_out_report.report_size == sizeof(XInputOutReport))
 	{

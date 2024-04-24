@@ -41,13 +41,13 @@ static const uint8_t uart_string_manufacturer[] = "Raspberry Pi";
 static const uint8_t uart_string_product[] = "Pico";
 static const uint8_t uart_string_version[] = "1.0";
 
-static const uint8_t *uart_string_descriptors[] =
-{
-	uart_string_language,
-	uart_string_manufacturer,
-	uart_string_product,
-	uart_string_version
-};
+// static const uint8_t *uart_string_descriptors[] =
+// {
+// 	uart_string_language,
+// 	uart_string_manufacturer,
+// 	uart_string_product,
+// 	uart_string_version
+// };
 
 static const tusb_desc_device_t uart_device_descriptor = {
 	.bLength = sizeof(tusb_desc_device_t),

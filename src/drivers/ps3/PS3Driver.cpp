@@ -93,6 +93,9 @@ void PS3Driver::initialize()
 
 void PS3Driver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer) 
 {
+    (void)idx;
+    (void)outBuffer;
+
     // if (!ps3_auth) return;
 
     ds3_report.up        = gamepad->buttons.up     ? 1 : 0;
@@ -153,12 +156,18 @@ void PS3Driver::process(int idx, Gamepad * gamepad, uint8_t * outBuffer)
 
 uint16_t PS3Driver::get_report(uint8_t report_id, hid_report_type_t report_type, uint8_t *buffer, uint16_t reqlen) 
 {
+    (void)report_id;
+    (void)report_type;
+    (void)reqlen;
+
     memcpy(buffer, &ds3_report, sizeof(Dualshock3Report));
     return sizeof(Dualshock3Report);
 }
 
 void PS3Driver::set_report(uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) 
 {
+    (void)bufsize;
+
     if (report_type == HID_REPORT_TYPE_FEATURE)
     {
         switch (report_id)
@@ -183,11 +192,17 @@ void PS3Driver::set_report(uint8_t report_id, hid_report_type_t report_type, uin
 
 bool PS3Driver::vendor_control_xfer_cb(uint8_t rhport, uint8_t stage, tusb_control_request_t const *request) 
 {
+    (void)rhport;
+    (void)stage;
+    (void)request;
+
     return false;
 }
 
 const uint16_t * PS3Driver::get_descriptor_string_cb(uint8_t index, uint16_t langid) 
 {
+    (void)langid;
+    
 	const char *value = (const char *)ps3_string_descriptors[index];
 	return getStringDescriptor(value, index); // getStringDescriptor returns a static array
 }
@@ -199,6 +214,7 @@ const uint8_t * PS3Driver::get_descriptor_device_cb()
 
 const uint8_t * PS3Driver::get_hid_descriptor_report_cb(uint8_t itf) 
 {
+    (void)itf;
     // ps3_auth = true;
     // ps3_host = false; // PS3 doesn't ask for an HID report descriptor
     return ps3_report_descriptor;
@@ -206,6 +222,8 @@ const uint8_t * PS3Driver::get_hid_descriptor_report_cb(uint8_t itf)
 
 const uint8_t * PS3Driver::get_descriptor_configuration_cb(uint8_t index) 
 {
+    (void)index;
+
     return ps3_configuration_descriptor;
 }
 
@@ -216,6 +234,8 @@ const uint8_t * PS3Driver::get_descriptor_device_qualifier_cb()
 
 void PS3Driver::update_rumble(int idx, Gamepad * gamepad)
 {
+    (void)idx;
+
     gamepad->rumble.l = ds3_out_report.rumble.left_motor_force;
-    gamepad->rumble.r = (ds3_out_report.rumble.right_motor_on < 0) ? 0xFF: 0x00;
+    gamepad->rumble.r = (ds3_out_report.rumble.right_motor_on > 0) ? 0xFF: 0x00;
 }

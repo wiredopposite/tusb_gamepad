@@ -31,6 +31,8 @@ const usbd_class_driver_t *usbd_app_driver_get_cb(uint8_t *driver_count)
 
 uint16_t tud_hid_get_report_cb(uint8_t itf, uint8_t report_id, hid_report_type_t report_type, uint8_t *buffer, uint16_t reqlen) 
 {
+	(void)itf;
+
 	return DriverManager::getInstance().getDriver()->get_report(report_id, report_type, buffer, reqlen);
 }
 
@@ -38,6 +40,8 @@ uint16_t tud_hid_get_report_cb(uint8_t itf, uint8_t report_id, hid_report_type_t
 // received data on OUT endpoint ( Report ID = 0, Type = 0 )
 void tud_hid_set_report_cb(uint8_t itf, uint8_t report_id, hid_report_type_t report_type, uint8_t const *buffer, uint16_t bufsize) 
 {
+	(void)itf;
+	
 	DriverManager::getInstance().getDriver()->set_report(report_id, report_type, buffer, bufsize);
 	tud_hid_report(report_id, buffer, bufsize); // echo back anything we received from host
 }

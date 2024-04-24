@@ -61,6 +61,9 @@ elseif(PICO_SDK_VERSION_STRING)
     endif()
 
     target_link_libraries(${LIB_NAME} ${LINK_LIBS})
+
+    add_compile_definitions(PICO_BOOT_STAGE2_CHOOSE_GENERIC_03H=1 PICO_XOSC_STARTUP_DELAY_MULTIPLIER=64)
+    target_compile_options(${LIB_NAME} PRIVATE -Wno-unused-function -Wno-unused-variable -Wno-array-bounds)
         
 else()
     message(FATAL_ERROR "Unsupported platform, Pico-SDK or ESP-IDF required.")
