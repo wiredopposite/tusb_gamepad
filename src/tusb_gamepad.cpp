@@ -8,12 +8,19 @@
 #include "drivers/gpdriver.h"
 #include "tusb_gamepad.h"
 
-Gamepad local_gamepad;
+Gamepad gamepad_copy;
+Gamepad* gp[MAX_GAMEPADS] = {NULL};
+uint8_t outBuffer[64];
 
 void init_tusb_gamepad(enum InputMode mode)
 {
     DriverManager& driverManager = DriverManager::getInstance();
     driverManager.setup(mode);
+
+    for (int i = 0; i < MAX_GAMEPADS; i++)
+    {
+       gp[i] = gamepad(i);
+    }
 }
 
 void tusb_gamepad_task()
@@ -23,12 +30,11 @@ void tusb_gamepad_task()
     
     for (int i = 0; i < MAX_GAMEPADS; i++)
     {
-        if (gamepad(i)) 
+        if (gp[i] != NULL) 
         {
-            local_gamepad = *gamepad(i);
-            uint8_t outBuffer[64];
-            driver->process(i, &local_gamepad, outBuffer); // Dereference the pointer when passing to process
-            driver->update_rumble(i, gamepad(i)); // Pass the pointer directly to update_rumble
+            gamepad_copy = *gamepad(i);
+            driver->process(i, &gamepad_copy, outBuffer);
+            driver->update_rumble(i, gp[i]);
         }
 
         #ifdef ESP_PLATFORM
