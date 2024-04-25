@@ -9,26 +9,6 @@ extern "C" {
 #include <string.h> 
 #include <stdbool.h>
 
-// typedef struct 
-// {
-// 	bool up 	;
-// 	bool down 	;
-// 	bool left 	;
-// 	bool right 	;
-// 	bool a		;
-// 	bool b 		;
-// 	bool x 		;
-// 	bool y 		;
-// 	bool l3		;
-// 	bool r3 	;
-// 	bool back 	;
-// 	bool start 	;
-// 	bool rb 	;
-// 	bool lb 	;
-// 	bool sys 	;
-// 	bool misc	;
-// } GamepadButtons;
-
 // #define GP_BUTTON_UP    0x0001
 // #define GP_BUTTON_DOWN  0x0002
 // #define GP_BUTTON_LEFT  0x0004
@@ -88,10 +68,10 @@ typedef struct
 
 typedef struct 
 {
-	int16_t lx;
 	int16_t ly;
-	int16_t rx;
+	int16_t lx;
 	int16_t ry;
+	int16_t rx;
 } GamepadJoysticks;
 
 typedef struct 
@@ -111,26 +91,20 @@ typedef void (*GamepadResetRumbleFunc)(Gamepad*);
 struct Gamepad 
 {
 	GamepadButtons 	 	 buttons;
-	GamepadAnalogButtons analog_buttons;
 	GamepadTriggers  	 triggers;
 	GamepadJoysticks 	 joysticks;
     GamepadRumble 	 	 rumble;
+	GamepadAnalogButtons analog_buttons;
 
 	bool enable_analog_buttons;
 
-    GamepadResetPadFunc 			reset_pad;
-	GamepadResetButtonsFunc 		reset_buttons;
-	GamepadResetTriggersFunc 		reset_triggers;
-	GamepadResetJoysticksFunc 		reset_joysticks;
-    GamepadResetRumbleFunc  		reset_rumble;
+    GamepadResetPadFunc 		reset_pad;
+	GamepadResetButtonsFunc 	reset_buttons;
+	GamepadResetTriggersFunc 	reset_triggers;
+	GamepadResetJoysticksFunc 	reset_joysticks;
+    GamepadResetRumbleFunc  	reset_rumble;
 };
 
-// void reset_pad(Gamepad *gamepad);
-// void reset_buttons(Gamepad *gamepad);
-// void reset_triggers(Gamepad *gamepad);
-// void reset_joysticks(Gamepad *gamepad);
-// void reset_rumble(Gamepad *gamepad);
-// void initialize_gamepad(Gamepad *gamepad);
 Gamepad *gamepad(int idx);
 
 #ifdef __cplusplus

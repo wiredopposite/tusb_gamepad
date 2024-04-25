@@ -9,26 +9,6 @@
 #include "drivers/uartbridge/uart_bridge.h"
 #include "drivers/uartbridge/uart_bridge_task.h"
 
-// void esp32_reset() 
-// {
-//     gpio_init(ESP_PROG_PIN);
-//     gpio_set_dir(ESP_PROG_PIN, GPIO_OUT);
-//     gpio_put(ESP_PROG_PIN, 1);
-
-//     gpio_init(ESP_RST_PIN);
-//     gpio_set_dir(ESP_RST_PIN, GPIO_OUT);
-//     gpio_put(ESP_PROG_PIN, 1);
-
-//     gpio_put(ESP_PROG_PIN, 0);
-// 	sleep_ms(250);
-
-//     gpio_put(ESP_RST_PIN, 0);
-//     sleep_ms(500);
-//     gpio_put(ESP_RST_PIN, 1);
-// 	sleep_ms(250);
-// 	gpio_put(ESP_PROG_PIN, 1);
-// }
-
 // void uart_bridge_task()
 // {
 //     set_sys_clock_khz(250000, false);
@@ -61,7 +41,6 @@ void init_uart_bridge(int uart0_tx_pin, int uart0_rx_pin)
 
     DriverManager& driverManager = DriverManager::getInstance();
     driverManager.setup(INPUT_MODE_UART_BRIDGE);
-    // driver = driverManager.getDriver();
 
     usbd_serial_init(uart0_tx_pin, uart0_rx_pin);
 
